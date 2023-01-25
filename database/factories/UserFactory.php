@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class UserFactory extends Factory
 {
@@ -18,12 +19,13 @@ class UserFactory extends Factory
     public function definition()
     {
         Log::info('test');
+        // $data = DB::table('users')->truncate();
         return [
             'name' =>  $this->faker->unique()->name(),
             'email'=>  $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
             'profile'=> $this->faker->text(10),
-            'type'  => '1',
+            'type'  => $this->faker->randomElement([0,1]),
             'phone'=> $this->faker->text(10),
             'address'=> $this->faker->text(10),
             'dob'=> now(),
