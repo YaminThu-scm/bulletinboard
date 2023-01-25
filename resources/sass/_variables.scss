@@ -5,3 +5,17 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+.table-responsive::-webkit-scrollbar {
+	height: 7px !important;
+  }
+  
+/* Track */
+.table-responsive::-webkit-scrollbar-track {
+	background: #ffff; 
+}
+   
+/* Handle */
+.table-responsive::-webkit-scrollbar-thumb {
+	background: #efefef; 
+}

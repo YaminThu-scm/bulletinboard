@@ -64,3 +64,11 @@ Route::get('/user-update', function () {
 Route::get('/user-update-confirm', function () {
     return view('user/update_confirm');
 });
+
+Route::get('/change-password', function () {
+    return view('user/change_password');
+});
+
+Route::get('/upload-file', function () {
+    return view('post/upload_file');
+});
