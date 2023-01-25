@@ -34,7 +34,6 @@ class CreateUsersTable extends Migration
             $table->foreign('created_user_id')->references('id')->on('users');
             $table->foreign('updated_user_id')->references('id')->on('users');
             $table->foreign('deleted_user_id')->references('id')->on('users');
-
         });
     }
 

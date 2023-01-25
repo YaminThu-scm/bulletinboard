@@ -5,8 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use DB;
 
 class UserFactory extends Factory
 {
@@ -18,23 +16,21 @@ class UserFactory extends Factory
     protected $model = User::class;
     public function definition()
     {
-        Log::info('test');
-        // $data = DB::table('users')->truncate();
         return [
             'name' =>  $this->faker->unique()->name(),
-            'email'=>  $this->faker->unique()->safeEmail(),
+            'email' =>  $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
-            'profile'=> $this->faker->text(10),
-            'type'  => $this->faker->randomElement([0,1]),
-            'phone'=> $this->faker->text(10),
-            'address'=> $this->faker->text(10),
-            'dob'=> now(),
-            'created_user_id'=> 1,
-            'updated_user_id'=> 1,
-            'deleted_user_id'=> 1,
-            'created_at'=> now(),
-            'updated_at'=> now(),
-            'deleted_at'=> now(), 
+            'profile' => $this->faker->text(10),
+            'type'  => $this->faker->randomElement([0, 1]),
+            'phone' => $this->faker->text(10),
+            'address' => $this->faker->text(10),
+            'dob' => now(),
+            'created_user_id' => 1,
+            'updated_user_id' => 1,
+            'deleted_user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'deleted_at' => now(),
         ];
     }
 
