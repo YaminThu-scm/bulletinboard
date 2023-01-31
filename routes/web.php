@@ -21,9 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/post-list', function () {
-    return view('post.list');
-})->name('post.list');
+Route::get('/post-list',[App\Http\Controllers\PostController::class, 'showPostList'])->name('post.list');
 
 Route::get('/post-create', function () {
     return view('post.create');
@@ -41,21 +39,15 @@ Route::get('/post-update-confirm', function () {
     return view('post.update_confirm');
 })->name('post.update.confirm');
 
-Route::get('/user-create', function () {
-    return view('user.create');
-})->name('user.create');
+Route::get('/user-create',[App\Http\Controllers\UserController::class, 'createUser'])->name('user.create');
 
 Route::get('/user-create-confirm', function () {
     return view('user.create_confirm');
 })->name('user.create.confirm');
 
-Route::get('/user-list', function () {
-    return view('user.list');
-})->name('user.list');
+Route::get('/user-list', [App\Http\Controllers\UserController::class, 'showUserList'])->name('user.list');
 
-Route::get('/user-profile', function () {
-    return view('user.profile');
-})->name('user.profile');
+Route::get('/user-profile/{id}', [App\Http\Controllers\UserController::class, 'showUser'])->name('user.profile');
 
 Route::get('/user-update', function () {
     return view('user.update');
