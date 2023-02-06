@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -22,4 +23,9 @@ class Post extends Model
         'updated_at',
         'deleted_at' 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_user_id', 'id');
+    }
 }
