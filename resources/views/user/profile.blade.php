@@ -6,8 +6,8 @@
         <div class="col-11 col-md-8 col-lg-5 shadow-sm p-4 p-md-5 mb-5 rounded">
             <form>
                 <div class="d-flex justify-content-between mb-5">
-                    <h5 class="cmn-ttl">User Profile</h5>
-                    <a href="#" class="btn btn-warning">Edit</a>
+                    <h5 class="">User Profile</h5>
+                    <a href="{{ route('user.edit', $user->id) }}" class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
                 <div class="form-group row mb-3">
                     <label for="inputName" class="col-sm-4">Name</label>

@@ -10,8 +10,8 @@
                 <input type="text" class="form-control me-2" placeholder="Email">
                 <input type="text" class="form-control me-2" placeholder="Created From">
                 <input type="text" class="form-control me-3" placeholder="Created To">
-                <button type="button" class="btn btn-success me-3">Search</button>
-                <a href="{{route('user.create')}}" class="btn btn-success me-3">Add</a>
+                <a href="#" class="cmn-btn me-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
+                <a href="{{route('user.create')}}" class="cmn-btn me-3"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
             </form>
             <div class="table-responsive overflow-auto mb-5">
                 <table class="table table-striped">
@@ -39,14 +39,16 @@
                             <td>{{ $user -> address }}</td>
                             <td>{{ $user -> created_at }}</td>
                             <td>{{ $user -> updated_at }}</td>
-                            <td><a href="#" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{{ route('user.delete', $user->id) }}" class="delete-btn"><i class="fa-solid fa-trash"></i></a>
                         </tr>
                         @endforeach
 
                     </tbody>
                 </table>
             </div>
-
+            <div class="navigation">
+                {{ $userList ->links() }}
+            </div>
         </div>
     </div>
 </div>

@@ -5,17 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-11 col-md-8 col-lg-5 shadow-sm p-4 p-md-5 mb-5 rounded">
             <h5 class="cmn-ttl mb-4">Create Post Confirmation</h5>
-            <form>
+            <form method="POST" action="{{ route('post.create.confirm') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group row mb-3 mb-md-4">
                     <label for="inputTitle" class="col-sm-4">Title</label>
                     <div class="col-sm-8">
-                        Post01
+                    <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Title"  value="{{old('title')}}" required autocomplete autofocus readonly="readonly">
                     </div>
                 </div>
                 <div class="form-group row mb-5">
                     <label for="inputDesc" class="col-sm-4">Description</label>
                     <div class="col-sm-8">
-                        This is Description for post01.
+                        <textarea class="form-control" id="inputDesc" rows="3" name="description" required autocomplete autofocus readonly="readonly">{{old('description')}}</textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary me-4">Create</button>
