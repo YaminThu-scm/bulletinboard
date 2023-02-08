@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center mb-4">
                     <h5 class="">Update User Confirmation</h5>
-                    <div class="profile-img">
-                        <img src="https://us.123rf.com/450wm/pandavector/pandavector1901/pandavector190105281/pandavector190105281.jpg?ver=6 wid" width="50" height="50" class="img-thumbnail" alt="...">
+                    <div class="profile-img img-height">
+                        <img src="{{ asset('storage/'. old('profile')) }}" alt="{{ old('name') }}" class="img-thumbnail" width="50" height="50">
                     </div>
                 </div>
                 <div class="card-body">
@@ -29,7 +29,7 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label class="col-sm-4">Type</label>
                             <div class="col-sm-8">
-                                <input type="text" name="type" value="{{old('type')}}" class="form-control" id="inputEmail" required autocomplete autofocus readonly="readonly">
+                                <input type="text" name="type" value="@if(old('type') == '0') Admin @else User @endif" class="form-control" id="inputEmail" required autocomplete autofocus readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group row mb-3 mb-md-4">

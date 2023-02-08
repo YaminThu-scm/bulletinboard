@@ -39,10 +39,18 @@ class UserController extends Controller
 
     public function saveUser(Request $request)
     {
+
+        if ($request->hasFile('profile')) {
+            $fileName = uniqid() . $request->file('profile')->getClientOriginalName();
+            $request->file('profile')->storeAs('public', $fileName);
+            $request['profile'] = $fileName;
+        }
+
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email:rfc,dns',
             'password' => 'required|confirmed|min:6',
+            'profile' => 'mimes:jpg,jpeg,png'
         ]);
 
         return redirect()->route('user.create.confirm')->withInput();

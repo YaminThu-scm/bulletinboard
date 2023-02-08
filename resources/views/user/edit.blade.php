@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5>Update User</h5>
-                    <div class="profile-img">
-                        <img src="https://us.123rf.com/450wm/pandavector/pandavector1901/pandavector190105281/pandavector190105281.jpg?ver=6 wid" width="50" height="50" class="img-thumbnail" alt="...">
+                    <div class="profile-img img-height">
+                        <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail" width="50" height="50">
                     </div>
                 </div>
                 <div class="card-body">
@@ -16,6 +16,7 @@
                         @csrf
 
                         <input type="hidden" name="userId" id="inputId" value="{{ $user -> id }}">
+                        <input type="hidden" name="profile" id="inputProfile" value="{{ $user -> profile }}">
 
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputName" class="col-sm-4 col-form-label">Name</label>
@@ -33,7 +34,8 @@
                             <label for="inputConfirmPassword" class="col-sm-4 col-form-label">Type</label>
                             <div class="btn-group col-sm-8">
                                 <select class="form-select" aria-label="Default select example" name="type">
-                                    <option value="{{$user -> type }}">{{$user -> type }}</option>
+                                    <option value="0" @if($user->type == '0')selected @endif >Admin</option>
+                                    <option value="1" @if($user->type == '1')selected @endif>User</option>
                                 </select>
                             </div>
                         </div>
@@ -58,12 +60,14 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputProfile" class="col-sm-4 col-form-label">Profile</label>
                             <div class="col-sm-8">
-                                <img src="https://us.123rf.com/450wm/pandavector/pandavector1901/pandavector190105281/pandavector190105281.jpg?ver=6 wid" width="150" height="150" class="img-thumbnail" alt="...">
+                                <div class="thumbnail-img">
+                                    <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row mb-5">
                             <a href="#" class="d-block">
-                                <label for="inputAddress" class="col-form-label">Change Password</label>
+                                Change Password
                             </a>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>

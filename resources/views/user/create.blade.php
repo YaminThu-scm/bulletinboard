@@ -18,7 +18,12 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputEmail" class="col-sm-4 col-form-label">Email Address</label>
                             <div class="col-sm-8">
-                                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="inputEmail" placeholder="Email" required>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>Plaese add the email.</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row mb-3 mb-md-4">
@@ -69,7 +74,7 @@
                         <div class="form-group row mb-5">
                             <label for="inputProfile" class="col-sm-4 col-form-label">Profile</label>
                             <div class="col-sm-8">
-                                <input type="file" name="profile" class="form-control" id="inputProfile" accept="image/png, image/gif, image/jpeg" required>
+                                <input type="file" name="profile" class="form-control" id="inputProfile" accept="png,jpeg,jpg">
                             </div>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>

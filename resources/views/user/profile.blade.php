@@ -15,7 +15,13 @@
                             <label for="inputName" class="col-sm-4">Name</label>
                             <div class="col-sm-8">
                                 <p class="mb-2">{{ $user -> name}}</p>
-                                <img src="{{ $user -> profile }}" width="150" height="150" class="img-thumbnail" alt="...">
+                                <div class="thumbnail-img">
+                                    @if($user-> profile == null )
+                                    <img src="{{ asset('storage/404_img.jpg') }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm"> 
+                                    @else
+                                    <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm">
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row mb-3 mb-md-4">
