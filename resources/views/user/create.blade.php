@@ -7,7 +7,7 @@
             <div class="card">
                 <h5 class="card-header">Create User</h5>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data" id="myForm">
                         @csrf
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputName" class="col-sm-4 col-form-label">Name</label>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>
-                        <button type="button" class="cmn-btn bdr-line">Clear</button>
+                        <button type="button" class="cmn-btn bdr-line" onClick = "inputClear()">Clear</button>
                     </form>
                 </div>
             </div>

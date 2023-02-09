@@ -7,7 +7,7 @@
             <div class="card">
                 <h5 class="card-header">Update Post</h5>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.edit.store', $post->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('post.edit.store', $post->id) }}" enctype="multipart/form-data" id="myForm">
                         @csrf
 
                         <input type="hidden" name="postId" id="inputId" value="{{ $post -> id }}">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>
-                        <button type="button" class="cmn-btn bdr-line">Clear</button>
+                        <button type="button" class="cmn-btn bdr-line" onClick = "inputClear()">Clear</button>
                     </form>
                 </div>
             </div>

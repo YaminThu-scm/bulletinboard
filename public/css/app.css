@@ -49,9 +49,17 @@ table.table tr td {
   font-size: 1rem;
 }
 
+.delete-btn {
+  cursor: pointer;
+}
+
 .delete-btn i {
-  color: #f44336;
+  color: #dc3545;
   font-size: 1rem;
+}
+
+.delete-modal-btn {
+  background: #dc3545 !important;
 }
 
 .cmn-btn {
@@ -63,15 +71,17 @@ table.table tr td {
   background: rgba(162, 151, 103, 0.9);
   color: #fff !important;
   text-decoration: none;
+  border-width: 0;
 }
 .cmn-btn:hover {
   color: #fff !important;
   opacity: 0.8;
 }
 .cmn-btn.bdr-line {
-  background: #fff;
   border: 1px solid rgba(162, 151, 103, 0.9);
+  background: #fff;
   color: rgba(162, 151, 103, 0.9) !important;
+  border-width: 1 !important;
 }
 
 a {
@@ -93,10 +103,6 @@ a:hover {
   max-height: 50px;
 }
 
-button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
-  border-width: 0;
-}
-
 .form-check-input:checked {
   background-color: rgba(162, 151, 103, 0.9) !important;
   border-color: rgba(162, 151, 103, 0.9) !important;
@@ -106,11 +112,13 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   max-width: 200px;
 }
 
-.post-tbl tr td:first-child, .post-tbl tr td:nth-of-type(2) {
+.post-tbl tr td:first-child,
+.post-tbl tr td:nth-of-type(2) {
   width: 30% !important;
 }
 
-.post-tbl tr td:nth-of-type(3), .post-tbl tr td:nth-of-type(4) {
+.post-tbl tr td:nth-of-type(3),
+.post-tbl tr td:nth-of-type(4) {
   width: 15% !important;
 }
 
@@ -119,9 +127,35 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   justify-content: center;
 }
 
-.page-link.active, .active > .page-link {
+.page-link.active,
+.active > .page-link {
   background-color: rgba(162, 151, 103, 0.9) !important;
   border-color: rgba(162, 151, 103, 0.9) !important;
+}
+
+.show-password {
+  position: relative;
+}
+.show-password .form-control {
+  padding-left: 0 !important;
+  border: 1px solid transparent !important;
+  background-color: transparent !important;
+  outline: none !important;
+}
+.show-password .form-control:focus {
+  box-shadow: none !important;
+}
+.show-password .password-icn {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+}
+.show-password .password-icn .fa-eye-slash:before {
+  content: "\f070";
+}
+.show-password .password-icn.active .fa-eye-slash:before {
+  content: "\f06e";
 }
 
 /*!

@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.edit.store', $user->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.edit.store', $user->id) }}" enctype="multipart/form-data" id="myForm">
                         @csrf
 
                         <input type="hidden" name="userId" id="inputId" value="{{ $user -> id }}">
@@ -60,8 +60,9 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputProfile" class="col-sm-4 col-form-label">Profile</label>
                             <div class="col-sm-8">
+                                <input type="file" name="profile" class="form-control" id="imgInp" accept="png,jpeg,jpg">
                                 <div class="thumbnail-img">
-                                    <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm">
+                                    <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm" id="showImg">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                             </a>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>
-                        <button type="button" class="cmn-btn bdr-line">Clear</button>
+                        <button type="button" class="cmn-btn bdr-line" onClick="inputClear()">Clear</button>
                     </form>
                 </div>
             </div>

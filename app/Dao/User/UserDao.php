@@ -68,6 +68,7 @@ class UserDao implements UserDaoInterface
 	  $user->phone = $request['phone'];
 	  $user->address = $request['address'];
 	  $user->dob = $request['dob'];
+	  $user->profile = $request['profile'];
 	  $user->update();
 	  return $user;
 	}

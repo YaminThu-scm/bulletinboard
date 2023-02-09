@@ -7,7 +7,7 @@
             <div class="card">
                 <h5 class="card-header">Create Post</h5>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data" id="myForm">
                         @csrf
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputTitle" class="col-sm-4 col-form-label">Title</label>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <button type="submit" class="cmn-btn me-4">Confirm</button>
-                        <button type="button" class="cmn-btn bdr-line">Clear</button>
+                        <button type="button" class="cmn-btn bdr-line" onClick = "inputClear()">Clear</button>
                     </form>
                 </div>
             </div>

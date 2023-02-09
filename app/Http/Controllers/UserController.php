@@ -88,7 +88,15 @@ class UserController extends Controller
       }
     
       public function submitUserEditView(Request $request,$id)
+ 
       {
+
+        if ($request->hasFile('profile')) {
+            $fileName = uniqid() . $request->file('profile')->getClientOriginalName();
+            $request->file('profile')->storeAs('public', $fileName);
+            $request['profile'] = $fileName;
+        }
+
           $request->validate([
             'name' => 'required',
             'email' => 'required',

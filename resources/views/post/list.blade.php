@@ -36,8 +36,28 @@
                                 <td>{{ $post->created_at }}</td>
                                 <td><a class="edit-btn" href="{{ route('post.edit', $post->id) }}">
                                         <i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td><a class="delete-btn" href="{{ route('post.delete', $post->id) }}">
-                                        <i class="fa-solid fa-trash"></i></a></td>
+                                <td>
+                                    <a class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-attr="{{ route('post.delete', $post->id) }}">
+                                        <i class="fa-solid fa-trash"></i></a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title text-center"> Are you sure want to delete?</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="cmn-btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <a class="cmn-btn delete-modal-btn" href="{{ route('post.delete', $post->id) }}">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -49,6 +69,6 @@
             </div>
         </div>
     </div>
-
 </div>
+
 @endsection
