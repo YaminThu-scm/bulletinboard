@@ -15,7 +15,7 @@
                         <a href="#" class="cmn-btn me-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
                         <a href="{{route('user.create')}}" class="cmn-btn me-3"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
                     </form>
-                    <div class="table-responsive overflow-auto mb-5">
+                    <div class="user-tbl table-responsive overflow-auto mb-5">
                         <table class="table table-striped">
                             <thead>
                                 <tr>

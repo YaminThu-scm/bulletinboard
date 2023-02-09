@@ -29,7 +29,10 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label class="col-sm-4">Type</label>
                             <div class="col-sm-8">
-                                <input type="text" name="type" value="@if(old('type') == '0') Admin @else User @endif" class="form-control" id="inputEmail" required autocomplete autofocus readonly="readonly">
+                                <select class="form-select" aria-label="Default select example" name="type" autocomplete autofocus readonly="readonly">
+                                    @if(old('type') == '0')<option value="0" selected>Admin</option>@endif
+                                    @if(old('type') == '1')<option value="1" selected>User</option>@endif
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row mb-3 mb-md-4">

@@ -18,7 +18,7 @@ class UserDao implements UserDaoInterface
     public function getUserList()
     {
      
-        $userList = DB::table('users as user')
+        $userList = DB::table('users as user')->orderBy('created_at', 'DESC')
         ->join('users as created_user', 'user.created_user_id', '=', 'created_user.id')
         ->join('users as updated_user', 'user.updated_user_id', '=', 'updated_user.id')
         ->select('user.*', 'created_user.name as created_user', 'updated_user.name as updated_user')

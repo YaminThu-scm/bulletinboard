@@ -12,7 +12,7 @@ class PostDao implements PostDaoInterface
 {
 	public function getPostList()
 	{	
-		return Post::paginate(5);
+		return Post::orderBy('created_at', 'DESC')->paginate(5);
 	}
 
 	public function addPost($request)

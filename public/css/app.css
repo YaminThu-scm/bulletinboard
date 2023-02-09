@@ -106,6 +106,24 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   max-width: 200px;
 }
 
+.post-tbl tr td:first-child, .post-tbl tr td:nth-of-type(2) {
+  width: 30% !important;
+}
+
+.post-tbl tr td:nth-of-type(3), .post-tbl tr td:nth-of-type(4) {
+  width: 15% !important;
+}
+
+.navigation {
+  display: flex !important;
+  justify-content: center;
+}
+
+.page-link.active, .active > .page-link {
+  background-color: rgba(162, 151, 103, 0.9) !important;
+  border-color: rgba(162, 151, 103, 0.9) !important;
+}
+
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
