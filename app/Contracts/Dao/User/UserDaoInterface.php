@@ -18,4 +18,8 @@ interface UserDaoInterface
 
 	public function addUser(Request $request);
 
+	public function deleteById($id);
+
+	public function updatedUserById($request,$id);
+
 }

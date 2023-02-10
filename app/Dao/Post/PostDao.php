@@ -3,6 +3,8 @@
 namespace App\Dao\Post;
 use App\Models\Post;
 use App\Contracts\Dao\Post\PostDaoInterface;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 /**
  * Data accessing object for post
  */
@@ -10,7 +12,7 @@ class PostDao implements PostDaoInterface
 {
 	public function getPostList()
 	{	
-		return Post::paginate(10);
+		return Post::orderBy('created_at', 'DESC')->paginate(5);
 	}
 
 	public function addPost($request)
@@ -38,13 +40,14 @@ class PostDao implements PostDaoInterface
         return $post;
     }
 
-	public function updatedPostById($request, $id)
+	public function updatedPostById($request,$id)
 	{
+		
 	  $post = Post::find($id);
 	  $post->title = $request['title'];
 	  $post->description = $request['description'];
 	  $post->status = '1';
-	  $post->save();
+	  $post->update();
 	  return $post;
 	}
 }

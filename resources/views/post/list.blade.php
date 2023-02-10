@@ -3,62 +3,72 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-11 col-lg-10 shadow-sm p-4 p-md-5 mb-5 rounded">
-            <h5 class="cmn-ttl mb-4">Post List</h5>
-            <form class="d-lg-flex flex-wrap mb-4 justify-content-end">
-                <div class="me-5 mb-2">
-                    <input type="text" class="form-control">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Post List</h5>
+                <div class="card-body">
+                    <form class="d-lg-flex flex-wrap mb-4 justify-content-end">
+                        <div class="me-5 mb-2">
+                            <input type="text" class="form-control">
+                        </div>
+                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
+                        <a href="{{route('post.create')}}" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
+                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-upload me-2"></i>Upload</a>
+                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-download me-2"></i>Download</a>
+                    </form>
+                    <table class="post-tbl table table-striped table-hover mb-5 p-4 p-md-5 mb-5 ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Post Title</th>
+                                <th scope="col">Post Description</th>
+                                <th scope="col">Posted User</th>
+                                <th scope="col">Posted Date</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach( $postList as $post)
+                            <tr>
+                                <td>{{ $post -> title }}</th>
+                                <td>{{ $post->description }}</td>
+                                <td>{{ $post->user->name }}</td>
+                                <td>{{ $post->created_at }}</td>
+                                <td><a class="edit-btn" href="{{ route('post.edit', $post->id) }}">
+                                        <i class="fa-solid fa-pen-to-square"></i></a></td>
+                                <td>
+                                    <a class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-attr="{{ route('post.delete', $post->id) }}">
+                                        <i class="fa-solid fa-trash"></i></a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title text-center"> Are you sure want to delete?</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="cmn-btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <a class="cmn-btn delete-modal-btn" href="{{ route('post.delete', $post->id) }}">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="navigation">
+                        {{ $postList->links() }}
+                    </div>
                 </div>
-                <button type="button" class="btn btn-success me-3 mb-2">Search</button>
-                <button type="button" class="btn btn-success me-3 mb-2">Add</button>
-                <button type="button" class="btn btn-success me-3 mb-2">Upload</button>
-                <button type="button" class="btn btn-success me-3 mb-2">Download</button>
-            </form>
-            <table class="table table-striped mb-5">
-                <thead>
-                    <tr>
-                        <th scope="col">Post Title</th>
-                        <th scope="col">Post Description</th>
-                        <th scope="col">Posted User</th>
-                        <th scope="col">Posted Date</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach( $postList as $post)
-                        <tr>
-                            <th scope="row">{{ $post -> title }}</th>
-                            <td>{{ $post->description }}</td>
-                            <td>{{ $post->name }}</td>
-                            <td>{{ $post->created_at }}</td>
-                            <td><a class="btn btn-warning" href="#">Edit</a></td>
-                            <td><a class="btn btn-danger" href="#">Delete</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <!-- <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
+            </div>
         </div>
     </div>
-
 </div>
+
 @endsection

@@ -11,7 +11,11 @@
     <title>Bulletin Board</title>
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +23,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 
 <body>
@@ -30,9 +36,8 @@
                 </a>
                 <div class="d-none d-md-block">
                     <div class="d-flex justify-content-start">
-                        <a href="#" class="d-block text-secondary text-decoration-none px-2">Users</a>
-                        <a href="#" class="d-block text-secondary text-decoration-none px-2">User</a>
-                        <a href="#" class="d-block text-secondary text-decoration-none px-2">Posts</a>
+                        <a href="{{route('user.list')}}" class="d-block text-secondary text-decoration-none px-2">Users</a>
+                        <a href="{{route('post.list')}}" class="d-block text-secondary text-decoration-none px-2">Posts</a>
                     </div>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -75,13 +80,10 @@
                         @endguest
 
                         <li class="nav-item d-block d-md-none">
-                            <a href="#" class="d-block text-secondary text-decoration-none py-1">Users</a>
+                            <a href="{{route('user.list')}}"  class="d-block text-secondary text-decoration-none py-1">Users</a>
                         </li>
                         <li class="nav-item d-block d-md-none">
-                            <a href="#" class="d-block text-secondary text-decoration-none py-1">User</a>
-                        </li>
-                        <li class="nav-item d-block d-md-none">
-                            <a href="#" class="d-block text-secondary text-decoration-none py-1">Posts</a>
+                            <a href="{{route('post.list')}}" class="d-block text-secondary text-decoration-none py-1">Posts</a>
                         </li>
                     </ul>
                 </div>

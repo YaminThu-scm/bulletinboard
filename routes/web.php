@@ -21,41 +21,47 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/post-list',[App\Http\Controllers\PostController::class, 'showPostList'])->name('post.list');
+Route::get('/post/list', [App\Http\Controllers\PostController::class, 'showPostList'])->name('post.list');
 
-Route::get('/post-create', function () {
-    return view('post.create');
-})->name('post.create');
+Route::get('/post/delete/{id}', [App\Http\Controllers\PostController::class, 'deletePost'])->name('post.delete');
 
-Route::get('/post-create-confirm', function () {
-    return view('post.create_confirm');
-})->name('post.create.confirm');
+Route::get('/post/create', [App\Http\Controllers\PostController::class, 'createPost'])->name('post.create');
 
-Route::get('/post-update', function () {
-    return view('post.update');
-})->name('post.update');
+Route::post('/post/create', [App\Http\Controllers\PostController::class, 'savePost'])->name('post.store');
 
-Route::get('/post-update-confirm', function () {
-    return view('post.update_confirm');
-})->name('post.update.confirm');
+Route::get('/post/create-confirm', [App\Http\Controllers\PostController::class, 'confirmCreatePost'])->name('post.create.confirm');
 
-Route::get('/user-create',[App\Http\Controllers\UserController::class, 'createUser'])->name('user.create');
+Route::post('/post/create-confirm', [App\Http\Controllers\PostController::class, 'submitConfirmCreatePost'])->name('post.create.confirm');
 
-Route::get('/user-create-confirm', function () {
-    return view('user.create_confirm');
-})->name('user.create.confirm');
+Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class, 'showPostEdit'])->name('post.edit');
 
-Route::get('/user-list', [App\Http\Controllers\UserController::class, 'showUserList'])->name('user.list');
+Route::post('/post/edit/{id}/confirm', [App\Http\Controllers\PostController::class, 'submitPostEditView'])->name('post.edit.store');
 
-Route::get('/user-profile/{id}', [App\Http\Controllers\UserController::class, 'showUser'])->name('user.profile');
+Route::get('/post/edit-confirm/{id}', [App\Http\Controllers\PostController::class, 'showPostEditConfirmView'])->name('post.confirm');
 
-Route::get('/user-update', function () {
-    return view('user.update');
-})->name('user.update');
+Route::post('/post/edit-save/{id}', [App\Http\Controllers\PostController::class, 'submitPostEditConfirmView'])->name('post.edit.save');
 
-Route::get('/user-update-confirm', function () {
-    return view('user.update_confirm');
-})->name('user.update.confirm');
+Route::get('/user/create', [App\Http\Controllers\UserController::class, 'createUser'])->name('user.create');
+
+Route::post('/user/create', [App\Http\Controllers\UserController::class, 'saveUser'])->name('user.store');
+
+Route::get('/user/create-confirm', [App\Http\Controllers\UserController::class, 'confirmCreateUser'])->name('user.create.confirm');
+
+Route::post('/user/create-confirm', [App\Http\Controllers\UserController::class, 'submitConfirmCreateUser'])->name('user.create.confirm');
+
+Route::get('/user/list', [App\Http\Controllers\UserController::class, 'showUserList'])->name('user.list');
+
+Route::get('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteUser'])->name('user.delete');
+
+Route::get('/user/profile/{id}', [App\Http\Controllers\UserController::class, 'showUser'])->name('user.profile');
+
+Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'showUserEdit'])->name('user.edit');
+
+Route::post('/user/edit/{id}/confirm', [App\Http\Controllers\UserController::class, 'submitUserEditView'])->name('user.edit.store');
+
+Route::get('/user/edit-confirm/{id}', [App\Http\Controllers\UserController::class, 'showUserEditConfirmView'])->name('user.confirm');
+
+Route::post('/user/edit-save/{id}', [App\Http\Controllers\UserController::class, 'submitUserEditConfirmView'])->name('user.edit.save');
 
 Route::get('/change-password', function () {
     return view('user.change_password');

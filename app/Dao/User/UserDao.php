@@ -18,11 +18,11 @@ class UserDao implements UserDaoInterface
     public function getUserList()
     {
      
-        $userList = DB::table('users as user')
+        $userList = DB::table('users as user')->orderBy('created_at', 'DESC')
         ->join('users as created_user', 'user.created_user_id', '=', 'created_user.id')
         ->join('users as updated_user', 'user.updated_user_id', '=', 'updated_user.id')
         ->select('user.*', 'created_user.name as created_user', 'updated_user.name as updated_user')
-        ->paginate(10);
+        ->paginate(5);
       return $userList;
     }
 
@@ -57,4 +57,19 @@ class UserDao implements UserDaoInterface
         $user = User::find($id);
         return $user->delete();
     }
+
+    public function updatedUserById($request,$id)
+	{
+		
+	  $user = User::find($id);
+	  $user->name = $request['name'];
+	  $user->email = $request['email'];
+	  $user->type = $request['type'];
+	  $user->phone = $request['phone'];
+	  $user->address = $request['address'];
+	  $user->dob = $request['dob'];
+	  $user->profile = $request['profile'];
+	  $user->update();
+	  return $user;
+	}
 }

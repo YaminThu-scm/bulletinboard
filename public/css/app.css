@@ -14,6 +14,150 @@
   background: #efefef;
 }
 
+.navigation {
+  text-align: center;
+}
+
+.navigation .text-sm {
+  margin-top: 1rem;
+}
+
+svg {
+  width: 2rem;
+}
+
+.card-header {
+  padding: 0.8rem 1rem !important;
+  background: rgba(162, 151, 103, 0.9) !important;
+  color: #fff !important;
+}
+
+table.table-striped tbody tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: #fcfcfc !important;
+  background-color: #fcfcfc !important;
+}
+
+table.table tr th,
+table.table tr td {
+  padding: 12px 15px;
+  vertical-align: middle;
+  border-color: #e9e9e9;
+}
+
+.edit-btn i {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.delete-btn {
+  cursor: pointer;
+}
+
+.delete-btn i {
+  color: #dc3545;
+  font-size: 1rem;
+}
+
+.delete-modal-btn {
+  background: #dc3545 !important;
+}
+
+.cmn-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  padding: 0 1rem;
+  background: rgba(162, 151, 103, 0.9);
+  color: #fff !important;
+  text-decoration: none;
+  border-width: 0;
+}
+.cmn-btn:hover {
+  color: #fff !important;
+  opacity: 0.8;
+}
+.cmn-btn.bdr-line {
+  border: 1px solid rgba(162, 151, 103, 0.9);
+  background: #fff;
+  color: rgba(162, 151, 103, 0.9) !important;
+  border-width: 1 !important;
+}
+
+a {
+  color: rgb(162, 151, 103) !important;
+}
+a:hover {
+  color: rgba(162, 151, 103, 0.8) !important;
+}
+
+.profile-img img {
+  border-radius: 50%;
+}
+.profile-img.img-height {
+  width: 50px;
+  height: 50px;
+}
+.profile-img.img-height img {
+  height: 100%;
+  max-height: 50px;
+}
+
+.form-check-input:checked {
+  background-color: rgba(162, 151, 103, 0.9) !important;
+  border-color: rgba(162, 151, 103, 0.9) !important;
+}
+
+.thumbnail-img {
+  max-width: 200px;
+}
+
+.post-tbl tr td:first-child,
+.post-tbl tr td:nth-of-type(2) {
+  width: 30% !important;
+}
+
+.post-tbl tr td:nth-of-type(3),
+.post-tbl tr td:nth-of-type(4) {
+  width: 15% !important;
+}
+
+.navigation {
+  display: flex !important;
+  justify-content: center;
+}
+
+.page-link.active,
+.active > .page-link {
+  background-color: rgba(162, 151, 103, 0.9) !important;
+  border-color: rgba(162, 151, 103, 0.9) !important;
+}
+
+.show-password {
+  position: relative;
+}
+.show-password .form-control {
+  padding-left: 0 !important;
+  border: 1px solid transparent !important;
+  background-color: transparent !important;
+  outline: none !important;
+}
+.show-password .form-control:focus {
+  box-shadow: none !important;
+}
+.show-password .password-icn {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+}
+.show-password .password-icn .fa-eye-slash:before {
+  content: "\f070";
+}
+.show-password .password-icn.active .fa-eye-slash:before {
+  content: "\f06e";
+}
+
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors

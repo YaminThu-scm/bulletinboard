@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' =>  $this->faker->unique()->name(),
             'email' =>  $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
-            'profile' =>  $this->faker->imageUrl(width: 640, height: 480),
+            'profile' =>  $this->faker->imageUrl(width: 640, height:480),
             'type'  => $this->faker->randomElement([0, 1]),
             'phone' => $this->faker->e164PhoneNumber(),
             'address' => $this->faker->text(10),

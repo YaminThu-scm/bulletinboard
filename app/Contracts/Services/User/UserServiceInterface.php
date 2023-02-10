@@ -16,5 +16,10 @@ interface UserServiceInterface
 
 	public function getUserById($id);
 
-	public function addUser(Request $request);
+	public function addUser($request);
+
+	public function deleteById($id);
+
+	public function updatedUserById($request,$id);
+
 }
