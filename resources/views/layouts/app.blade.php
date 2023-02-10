@@ -34,12 +34,14 @@
                 <a class="navbar-brand font-weight-bold" href="{{ url('/') }}">
                     SCM Bulletin Board
                 </a>
+                @auth
                 <div class="d-none d-md-block">
                     <div class="d-flex justify-content-start">
                         <a href="{{route('user.list')}}" class="d-block text-secondary text-decoration-none px-2">Users</a>
                         <a href="{{route('post.list')}}" class="d-block text-secondary text-decoration-none px-2">Posts</a>
                     </div>
                 </div>
+                @endauth
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -78,13 +80,14 @@
                             </div>
                         </li>
                         @endguest
-
+                        @auth
                         <li class="nav-item d-block d-md-none">
-                            <a href="{{route('user.list')}}"  class="d-block text-secondary text-decoration-none py-1">Users</a>
+                            <a href="{{route('user.list')}}" class="d-block text-secondary text-decoration-none py-1">Users</a>
                         </li>
                         <li class="nav-item d-block d-md-none">
                             <a href="{{route('post.list')}}" class="d-block text-secondary text-decoration-none py-1">Posts</a>
                         </li>
+                        @endauth
                     </ul>
                 </div>
             </div>
