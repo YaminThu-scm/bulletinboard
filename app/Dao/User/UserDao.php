@@ -17,12 +17,24 @@ class UserDao implements UserDaoInterface
      */
     public function getUserList()
     {
-     
-        $userList = DB::table('users as user')->orderBy('created_at', 'DESC')
+        $userList = DB::table('users as user')
+        ->when(request('searchName'),function($query){
+            $key = request('searchName');
+            $query->where('user.name','Like','%'.$key.'%');
+        })->when(request('searchEmail'),function($query){
+            $key1 = request('searchEmail');
+            $query->where('user.email','Like','%'.$key1.'%');
+        })->when(request('searchCreatedFrom'),function($query){
+            $key2 = request('searchCreatedFrom');
+            $query->where('user.created_at','Like','%'.$key2.'%');
+        })->when(request('searchCreatedTo'),function($query){
+            $key3 = request('searchCreatedTo');
+            $query->where('user.updated_at','Like','%'.$key3.'%');
+        })
         ->join('users as created_user', 'user.created_user_id', '=', 'created_user.id')
         ->join('users as updated_user', 'user.updated_user_id', '=', 'updated_user.id')
         ->select('user.*', 'created_user.name as created_user', 'updated_user.name as updated_user')
-        ->paginate(5);
+        ->orderBy('created_at', 'DESC')->paginate(5);
       return $userList;
     }
 
@@ -52,7 +64,7 @@ class UserDao implements UserDaoInterface
         return $user;
     }
 
-    
+
 	public function deleteById($id) {
         $user = User::find($id);
         return $user->delete();
@@ -60,7 +72,7 @@ class UserDao implements UserDaoInterface
 
     public function updatedUserById($request,$id)
 	{
-		
+
 	  $user = User::find($id);
 	  $user->name = $request['name'];
 	  $user->email = $request['email'];

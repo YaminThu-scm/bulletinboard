@@ -7,11 +7,11 @@
             <div class="card">
                 <h5 class="card-header">Post List</h5>
                 <div class="card-body">
-                    <form class="d-lg-flex flex-wrap mb-4 justify-content-end">
+                    <form action="{{ route('post.list') }}" method="GET" role="search" class="d-lg-flex flex-wrap mb-4 justify-content-end">
                         <div class="me-5 mb-2">
-                            <input type="text" class="form-control">
+                            <input type="text" name="searchKey" class="form-control" value="{{request('searchKey')}}">
                         </div>
-                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
+                        <button type="submit" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</button>
                         <a href="{{route('post.create')}}" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
                         <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-upload me-2"></i>Upload</a>
                         <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-download me-2"></i>Download</a>
@@ -63,7 +63,7 @@
                         </tbody>
                     </table>
                     <div class="navigation">
-                        {{ $postList->links() }}
+                        {{ $postList->appends(request()->query())->links() }}
                     </div>
                 </div>
             </div>
