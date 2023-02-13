@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Contracts\Dao\User\UserDaoInterface;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Data Access Object for User
@@ -52,9 +53,8 @@ class UserDao implements UserDaoInterface
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->created_user_id = 1;
-        $user->updated_user_id = 1;
-        $user->deleted_user_id = 1;
+        $user->created_user_id = Auth::user()->id;
+        $user->updated_user_id = Auth::user()->id;
         $user->type = $request->type;
         $user->phone = $request->phno;
         $user->dob = $request->dob;

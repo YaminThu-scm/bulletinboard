@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Contracts\Dao\Post\PostDaoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Data accessing object for post
@@ -27,9 +28,8 @@ class PostDao implements PostDaoInterface
         $post->title = $request->title;
         $post->description = $request->description;
         $post->status = 1;
-        $post->created_user_id = 1;
-        $post->updated_user_id = 1;
-        $post->deleted_user_id = 1;
+        $post->created_user_id = Auth::user()->id;
+        $post->updated_user_id = Auth::user()->id;
         $post->save();
         return $post;
     }
