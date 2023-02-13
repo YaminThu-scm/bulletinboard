@@ -18,6 +18,18 @@ function goBack() {
     window.history.back();
 }
 
+$(document).ready(
+    function(){
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('.upload-btn').attr('disabled',false);
+                    $('.upload-btn').addClass('active');
+                }
+            }
+            );
+    });
+
 imgInp.onchange = (evt) => {
     const [file] = imgInp.files;
     if (file) {

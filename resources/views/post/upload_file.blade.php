@@ -13,7 +13,7 @@
                             <label for="inputFile" class="form-label">Import FIle From:</label>
                             <input type="file" name="upload-file" class="form-control" id="inputProfile">
                         </div>
-                        <button type="submit" class="cmn-btn me-4">Import File</button>
+                        <button type="submit" class="upload-btn cmn-btn" disabled>Import File</button>
                     </form>
                 </div>
             </div>

@@ -90,6 +90,13 @@ table.table tr td {
         color: rgba(162, 151, 103, 0.9) !important;
         border-width: 1 !important;
     }
+
+    &.upload-btn {
+        background: rgba(162, 151, 103, 0.5);
+        &.active {
+            background: rgba(162, 151, 103, 0.9);
+        }
+    }
 }
 
 a {

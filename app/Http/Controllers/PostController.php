@@ -115,6 +115,6 @@ class PostController extends Controller
   {
 
     Excel::import(new ImportPosts, request()->file('upload-file'));
-    return back();
+    return redirect()->route('post.list');
   }
 }
