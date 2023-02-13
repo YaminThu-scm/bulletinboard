@@ -7,12 +7,13 @@
             <div class="card">
                 <h5 class="card-header">Upload CSV File</h5>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-4">
                             <label for="inputFile" class="form-label">Import FIle From:</label>
-                            <input type="file" class="form-control" id="inputProfile">
+                            <input type="file" name="upload-file" class="form-control" id="inputProfile">
                         </div>
-                        <button type="submit" class="btn btn-primary me-4">Import File</button>
+                        <button type="submit" class="cmn-btn me-4">Import File</button>
                     </form>
                 </div>
             </div>

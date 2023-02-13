@@ -67,6 +67,11 @@ Route::get('/change-password', function () {
     return view('user.change_password');
 })->name('user.change.password');
 
-Route::get('/upload-file', function () {
-    return view('post.upload_file');
-})->name('post.upload.file');
+
+Route::get('/post/download', [App\Http\Controllers\PostController::class, 'downloadPostCSV'])->name('post.download');
+
+Route::get('/post/upload', [App\Http\Controllers\PostController::class, 'showPostUploadView'])->name('upload.file');
+
+Route::post('/post/upload', [App\Http\Controllers\PostController::class, 'submitPostUploadView'])->name('upload.file');
+
+
