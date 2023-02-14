@@ -39,7 +39,6 @@ class PostController extends Controller
       'title' => 'required',
       'description' => 'required',
     ]);
-
     return redirect()->route('post.create.confirm')->withInput();
   }
 
@@ -57,7 +56,6 @@ class PostController extends Controller
       'title' => 'required',
       'description' => 'required',
     ]);
-
     $this->postInterface->addPost($request);
     return redirect()->route('post.list');
   }
@@ -81,14 +79,12 @@ class PostController extends Controller
       'title' => 'required',
       'description' => 'required',
     ]);
-
     return redirect()->route('post.confirm', [$id])->withInput();
   }
 
 
   public function showPostEditConfirmView($id)
   {
-
     if (old()) {
       return view('post.edit_confirm');
     }
@@ -97,14 +93,13 @@ class PostController extends Controller
 
   public function submitPostEditConfirmView(Request $request, $id)
   {
-    $post = $this->postInterface->updatedPostById($request, intval($id));
+    $this->postInterface->updatedPostById($request, intval($id));
     return redirect()->route('post.list');
   }
 
   public function downloadPostCSV()
   {
     return Excel::download(new ExportPosts, 'posts.csv');
-
   }
 
   public function showPostUploadView() {
@@ -113,7 +108,6 @@ class PostController extends Controller
 
   public function submitPostUploadView(Request $request)
   {
-
     Excel::import(new ImportPosts, request()->file('upload-file'));
     return redirect()->route('post.list');
   }

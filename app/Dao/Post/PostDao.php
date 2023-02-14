@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 class PostDao implements PostDaoInterface
 {
 	public function getPostList()
-	{	
+	{
 		return Post::orderBy('created_at', 'DESC')->paginate(5);
 	}
 
@@ -33,7 +33,6 @@ class PostDao implements PostDaoInterface
         return $post->delete();
     }
 
-	
     public function getPostById($id)
     {
         $post = Post::find($id);
@@ -42,7 +41,6 @@ class PostDao implements PostDaoInterface
 
 	public function updatedPostById($request,$id)
 	{
-		
 	  $post = Post::find($id);
 	  $post->title = $request['title'];
 	  $post->description = $request['description'];

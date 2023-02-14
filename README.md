@@ -2,9 +2,7 @@
 
 ### DB
 creating tables in database `php artisan migrate`
-
 inserting data into tables `php artisan db:seed`
-
 
 ### Just run App
 ```
@@ -12,22 +10,19 @@ npm run dev
 php artisan serve
 ```
 
-
 ### Error in Laravel/Excel Package
-
 #### Laravel/Excel Package
-Installation for Maatwebsite/Excel 
+Installation for Maatwebsite/Excel
 `composer require maatwebsite/excel`
 
 #### Use this command Instead
-
 ```
 composer require maatwebsite/excel --ignore-platform-reqs
                         or
 composer require psr/simple-cache:^2.0 maatwebsite/excel
 ```
 
-*The Maatwebsite\Excel\ExcelServiceProvider is auto-discovered and registered by default.*
+_The Maatwebsite\Excel\ExcelServiceProvider is auto-discovered and registered by default._
 
 ##### If you want to register it yourself, add the ServiceProvider in config/app.php:
 ```
@@ -47,4 +42,3 @@ composer require psr/simple-cache:^2.0 maatwebsite/excel
 ```
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
 ```
-
