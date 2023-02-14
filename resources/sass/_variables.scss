@@ -174,3 +174,7 @@ a {
         }
     }
 }
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: transparent !important;
+}

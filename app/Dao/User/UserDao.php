@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Contracts\Dao\User\UserDaoInterface;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Data Access Object for User
@@ -17,7 +18,7 @@ class UserDao implements UserDaoInterface
      */
     public function getUserList()
     {
-     
+
         $userList = DB::table('users as user')->orderBy('created_at', 'DESC')
         ->join('users as created_user', 'user.created_user_id', '=', 'created_user.id')
         ->join('users as updated_user', 'user.updated_user_id', '=', 'updated_user.id')
@@ -52,7 +53,7 @@ class UserDao implements UserDaoInterface
         return $user;
     }
 
-    
+
 	public function deleteById($id) {
         $user = User::find($id);
         return $user->delete();
@@ -60,7 +61,7 @@ class UserDao implements UserDaoInterface
 
     public function updatedUserById($request,$id)
 	{
-		
+
 	  $user = User::find($id);
 	  $user->name = $request['name'];
 	  $user->email = $request['email'];
@@ -72,4 +73,10 @@ class UserDao implements UserDaoInterface
 	  $user->update();
 	  return $user;
 	}
+
+    public function changeUserPassword($request) {
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
+    }
 }

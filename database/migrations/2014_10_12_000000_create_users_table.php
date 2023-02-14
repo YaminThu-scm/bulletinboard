@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('deleted_user_id');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->rememberToken();
         });
         Schema::table('users', function (Blueprint $table) {
 
