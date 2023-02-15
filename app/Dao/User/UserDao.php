@@ -60,7 +60,6 @@ class UserDao implements UserDaoInterface
         return $user;
     }
 
-
     public function deleteById($id)
     {
         $user = User::find($id);

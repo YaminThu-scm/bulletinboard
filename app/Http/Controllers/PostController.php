@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Post;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportPosts;
+use App\Imports\ImportPosts;
 
 class PostController extends Controller
 {
@@ -56,7 +60,6 @@ class PostController extends Controller
         return redirect()->route('post.list');
     }
 
-
     public function deletePost($id)
     {
         $this->postInterface->deleteById($id);
@@ -90,5 +93,20 @@ class PostController extends Controller
     {
         $post = $this->postInterface->updatedPostById($request, intval($id));
         return redirect()->route('post.list');
+    }
+    
+    public function downloadPostCSV()
+    {
+      return Excel::download(new ExportPosts, 'posts.csv');
+    }
+
+    public function showPostUploadView() {
+      return view('post.upload_file');
+    }
+
+    public function submitPostUploadView(Request $request)
+    {
+      Excel::import(new ImportPosts, request()->file('upload-file'));
+      return redirect()->route('post.list');
     }
 }

@@ -68,7 +68,6 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-
         $this->userInterface->addUser($request);
         return redirect()->route('user.list');
     }
@@ -92,16 +91,13 @@ class UserController extends Controller
             $request->file('profile')->storeAs('public', $fileName);
             $request['profile'] = $fileName;
         }
-
         $request->validate([
             'name' => 'required',
             'email' => 'required',
             'type' => 'required',
         ]);
-
         return redirect()->route('user.confirm', [$id])->withInput();
     }
-
 
     public function showUserEditConfirmView($id)
     {
@@ -113,7 +109,7 @@ class UserController extends Controller
 
     public function submitUserEditConfirmView(Request $request, $id)
     {
-        $user = $this->userInterface->updatedUserById($request, intval($id));
+        $this->userInterface->updatedUserById($request, intval($id));
         return redirect()->route('user.list');
     }
 }

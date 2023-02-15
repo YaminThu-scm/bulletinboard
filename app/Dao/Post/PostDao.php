@@ -48,7 +48,6 @@ class PostDao implements PostDaoInterface
         return $post->delete();
     }
 
-
     public function getPostById($id)
     {
         $post = Post::find($id);

@@ -13,8 +13,8 @@
                         </div>
                         <button type="submit" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</button>
                         <a href="{{route('post.create')}}" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
-                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-upload me-2"></i>Upload</a>
-                        <a href="#" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-download me-2"></i>Download</a>
+                        <a href="{{route('upload.file')}}" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-upload me-2"></i>Upload</a>
+                        <a href="{{route('post.download')}}" class="cmn-btn me-3 mb-2"><i class="fa-solid fa-download me-2"></i>Download</a>
                     </form>
                     <table class="post-tbl table table-striped table-hover mb-5 p-4 p-md-5 mb-5 ">
                         <thead>
