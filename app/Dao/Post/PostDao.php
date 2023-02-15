@@ -7,6 +7,7 @@ use App\Contracts\Dao\Post\PostDaoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\PostStatusEnum;
 
 /**
  * Data accessing object for post
@@ -15,11 +16,18 @@ class PostDao implements PostDaoInterface
 {
     public function getPostList()
     {
-        $key = request('searchKey');
-        return Post::whereHas('user', function ($query) {
-            $key = request('searchKey');
-            $query->where('name', 'like', '%' . $key . '%');
-        })->orwhere('title', 'like', '%' . $key . '%')->orwhere('description', 'like', '%' . $key . '%')->orderBy('created_at', 'DESC')->paginate(5);
+        $searchKey = request('searchKey');
+        $postList =  Post::select("*")
+            ->where('status', PostStatusEnum::Active)
+            ->where(function ($query) use ($searchKey) {
+                $query->whereHas('user', function ($query) {
+                    $query->where('name', 'like', '%' . request('searchKey') . '%');
+                });
+                $query->orwhere('title', 'LIKE', '%' . $searchKey . '%')
+                    ->orWhere('description', 'LIKE', '%' . $searchKey . '%');
+            })
+            ->orderBy('created_at', 'DESC')->paginate(config('data.pagination'));
+        return $postList;
     }
 
     public function addPost($request)
@@ -27,7 +35,7 @@ class PostDao implements PostDaoInterface
         $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
-        $post->status = 1;
+        $post->status = PostStatusEnum::Active;
         $post->created_user_id = Auth::user()->id;
         $post->updated_user_id = Auth::user()->id;
         $post->save();
@@ -49,11 +57,14 @@ class PostDao implements PostDaoInterface
 
     public function updatedPostById($request, $id)
     {
-
         $post = Post::find($id);
         $post->title = $request['title'];
         $post->description = $request['description'];
-        $post->status = '1';
+        if ($request['status']) {
+            $post->status = PostStatusEnum::Active;
+        } else {
+            $post->status = PostStatusEnum::Pending;
+        }
         $post->update();
         return $post;
     }

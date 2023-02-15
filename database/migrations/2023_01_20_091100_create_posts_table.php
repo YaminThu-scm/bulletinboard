@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('deleted_user_id')->nullable();
             $table->foreign('deleted_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->softDeletes($column = 'deleted_at', $precision = 0)->nullable();
         });
     }
 

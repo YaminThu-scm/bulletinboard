@@ -39,20 +39,17 @@ class UserController extends Controller
 
     public function saveUser(Request $request)
     {
-
         if ($request->hasFile('profile')) {
             $fileName = uniqid() . $request->file('profile')->getClientOriginalName();
             $request->file('profile')->storeAs('public', $fileName);
             $request['profile'] = $fileName;
         }
-
         $request->validate([
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
             'password' => 'required|confirmed|min:6',
             'profile' => 'mimes:jpg,jpeg,png'
         ]);
-
         return redirect()->route('user.create.confirm')->withInput();
     }
 
@@ -82,45 +79,41 @@ class UserController extends Controller
         return redirect()->route('user.list');
     }
 
-    public function showUserEdit($id) {
+    public function showUserEdit($id)
+    {
         $user = $this->userInterface->getUserById($id);
         return view('user.edit', compact('user'));
-      }
-    
-      public function submitUserEditView(Request $request,$id)
- 
-      {
+    }
 
+    public function submitUserEditView(Request $request, $id)
+    {
         if ($request->hasFile('profile')) {
             $fileName = uniqid() . $request->file('profile')->getClientOriginalName();
             $request->file('profile')->storeAs('public', $fileName);
             $request['profile'] = $fileName;
         }
 
-          $request->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'required',
             'type' => 'required',
-          ]);
-    
-          return redirect()->route('user.confirm',[$id])->withInput();
-      }
-    
-    
-      public function showUserEditConfirmView($id)
-      {
-    
+        ]);
+
+        return redirect()->route('user.confirm', [$id])->withInput();
+    }
+
+
+    public function showUserEditConfirmView($id)
+    {
         if (old()) {
             return view('user.edit_confirm');
         }
         return redirect()->route('user.list');
-    
-      }
-    
-      public function submitUserEditConfirmView(Request $request, $id)
-      {
+    }
+
+    public function submitUserEditConfirmView(Request $request, $id)
+    {
         $user = $this->userInterface->updatedUserById($request, intval($id));
         return redirect()->route('user.list');
-      }
-    
+    }
 }
