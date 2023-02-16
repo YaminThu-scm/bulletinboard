@@ -83,6 +83,12 @@ table.table tr td {
   color: rgba(162, 151, 103, 0.9) !important;
   border-width: 1 !important;
 }
+.cmn-btn.upload-btn {
+  background: rgba(162, 151, 103, 0.5);
+}
+.cmn-btn.upload-btn.active {
+  background: rgba(162, 151, 103, 0.9);
+}
 
 a {
   color: rgb(162, 151, 103) !important;
@@ -160,6 +166,11 @@ a:hover {
 
 .dropdown-item.active, .dropdown-item:active {
   background-color: transparent !important;
+}
+
+.form-check-input.custom-check {
+  width: 4em !important;
+  height: 2em !important;
 }
 
 /*!

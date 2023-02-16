@@ -22,10 +22,10 @@ class CreatePostsTable extends Migration
             $table->foreign('created_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('updated_user_id');
             $table->foreign('updated_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('deleted_user_id');
+            $table->unsignedBigInteger('deleted_user_id')->nullable();
             $table->foreign('deleted_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->softDeletes($column = 'deleted_at', $precision = 0)->nullable();
         });
     }
 

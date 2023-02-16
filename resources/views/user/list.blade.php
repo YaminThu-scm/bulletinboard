@@ -7,12 +7,12 @@
             <div class="card">
                 <div class="card-header">User List</div>
                 <div class="card-body">
-                    <form class="d-flex mb-4">
-                        <input type="text" class="form-control me-2" placeholder="Name">
-                        <input type="text" class="form-control me-2" placeholder="Email">
-                        <input type="text" class="form-control me-2" placeholder="Created From">
-                        <input type="text" class="form-control me-3" placeholder="Created To">
-                        <a href="#" class="cmn-btn me-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</a>
+                    <form action="{{ route('user.list') }}" method="GET" role="search" class="d-flex mb-4">
+                        <input type="text" name="searchName" class="form-control me-2" value="{{request('searchName')}}" placeholder="Name">
+                        <input type="text" name="searchEmail" class="form-control me-2" value="{{request('searchEmail')}}" placeholder="Email">
+                        <input type="text" name="searchCreatedFrom" class="form-control me-2" value="{{request('searchCreatedFrom')}}" placeholder="Created From">
+                        <input type="text" name="searchCreatedTo" class="form-control me-3" value="{{request('searchCreatedTo')}}" placeholder="Created To">
+                        <button type="submit" class="cmn-btn me-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Search</button>
                         <a href="{{route('user.create')}}" class="cmn-btn me-3"><i class="fa-solid fa-circle-plus me-2"></i>Add</a>
                     </form>
                     <div class="user-tbl table-responsive overflow-auto mb-5">
@@ -70,7 +70,7 @@
                         </table>
                     </div>
                     <div class="navigation">
-                        {{ $userList ->links() }}
+                        {{ $userList->appends(request()->query())->links() }}
                     </div>
                 </div>
             </div>
