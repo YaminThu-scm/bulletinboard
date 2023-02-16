@@ -181,3 +181,10 @@ a {
         }
     }
 }
+
+.form-check-input {
+    &.custom-check {
+        width: 4em !important;
+        height: 2em !important;
+    }
+}

@@ -99,7 +99,6 @@ class UserController extends Controller
         return redirect()->route('user.confirm', [$id])->withInput();
     }
 
-
     public function showUserEditConfirmView($id)
     {
         if (old()) {
