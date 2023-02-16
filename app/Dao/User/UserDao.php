@@ -65,7 +65,6 @@ class UserDao implements UserDaoInterface
         return $user->delete();
     }
 
-
     public function updatedUserById($request, $id)
     {
         $user = User::find($id);
