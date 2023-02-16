@@ -24,8 +24,14 @@ class PostController extends Controller
 
     public function showPostList()
     {
-        $postList = $this->postInterface->getPostList();
-        return view('post.list', compact('postList'));
+        if(Auth::user()->type == '0') {
+            $postList = $this->postInterface->getPostListAll();
+            return view('post.list', compact('postList'));
+            }
+            else {
+            $postList = $this->postInterface->getPostList();
+            return view('post.list', compact('postList'));
+            }
     }
 
     public function createPost()
@@ -94,7 +100,7 @@ class PostController extends Controller
         $post = $this->postInterface->updatedPostById($request, intval($id));
         return redirect()->route('post.list');
     }
-    
+
     public function downloadPostCSV()
     {
       return Excel::download(new ExportPosts, 'posts.csv');

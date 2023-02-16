@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
  */
 interface PostDaoInterface
 {
-	
+	public function getPostListAll();
+
 	public function getPostList();
 
 	public function addPost(Request $request);
