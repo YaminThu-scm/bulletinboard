@@ -59,19 +59,21 @@ class PostDao implements PostDaoInterface
 
     public function deleteById($id)
     {
-        $post = Post::find($id);
-        return $post->delete();
+        $post =Post::findOrFail($id);
+        $post->deleted_user_id = Auth::user()->id;
+        $post->save();
+        $post->delete();
     }
 
     public function getPostById($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return $post;
     }
 
     public function updatedPostById($request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->title = $request['title'];
         $post->description = $request['description'];
         if ($request['status']) {
@@ -79,6 +81,7 @@ class PostDao implements PostDaoInterface
         } else {
             $post->status = PostStatusEnum::Draft;
         }
+        $post->updated_user_id = Auth::user()->id;
         $post->update();
         return $post;
     }

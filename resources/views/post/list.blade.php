@@ -87,6 +87,13 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mb-3">
+                                                                        <label for="inputName" class="col-sm-4">Post
+                                                                            Created Date</label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="mb-2">{{date('Y/m/d', strtotime($post->created_at))}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row mb-3">
                                                                         <label for="inputName" class="col-sm-4">Posted
                                                                             User</label>
                                                                         <div class="col-sm-8">
@@ -94,10 +101,17 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mb-3">
-                                                                        <label for="inputName" class="col-sm-4">Posted
-                                                                            Date</label>
+                                                                        <label for="inputName" class="col-sm-4">Post
+                                                                            Updated Date</label>
                                                                         <div class="col-sm-8">
-                                                                            <p class="mb-2">{{ $post->created_at }}</p>
+                                                                            <p class="mb-2">{{date('Y/m/d', strtotime($post->updated_at))}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputName" class="col-sm-4">Post
+                                                                            Updated User</label>
+                                                                        <div class="col-sm-8">
+                                                                            <p class="mb-2">{{ $post->user->name }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -111,15 +125,15 @@
                                                 </div>
                                             <td>{{ $post->description }}</td>
                                             <td>{{ $post->user->name }}</td>
-                                            <td>{{ $post->created_at }}</td>
+                                            <td>{{date('Y/m/d', strtotime($post->created_at))}}</td>
                                             <td><a class="edit-btn" href="{{ route('post.edit', $post->id) }}">
                                                     <i class="fa-solid fa-pen-to-square"></i></a></td>
                                             <td>
-                                                <a class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                <a class="delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $post->id }}"
                                                     data-attr="{{ route('post.delete', $post->id) }}">
                                                     <i class="fa-solid fa-trash"></i></a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deleteModal" tabindex="-1"
+                                                <div class="modal fade" id="deleteModal{{ $post->id }}" tabindex="-1"
                                                     aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">

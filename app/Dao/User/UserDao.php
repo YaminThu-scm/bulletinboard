@@ -32,10 +32,9 @@ class UserDao implements UserDaoInterface
             ->join('users as created_user', 'user.created_user_id', '=', 'created_user.id')
             ->join('users as updated_user', 'user.updated_user_id', '=', 'updated_user.id')
             ->select('user.*', 'created_user.name as created_user', 'updated_user.name as updated_user')
-            ->orderBy('created_at', 'DESC')->paginate(config('data.pagination'));
+            ->orderBy('created_at', 'DESC')->where('user.deleted_at', NULL)->paginate(config('data.pagination'));
         return $userList;
     }
-
 
     public function getUserById($id)
     {
@@ -62,13 +61,15 @@ class UserDao implements UserDaoInterface
 
     public function deleteById($id)
     {
-        $user = User::find($id);
-        return $user->delete();
+        $user = User::findOrFail($id);
+        $user->deleted_user_id = Auth::user()->id;
+        $user->save();
+        $user->delete();
     }
 
     public function updatedUserById($request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->name = $request['name'];
         $user->email = $request['email'];
         $user->type = $request['type'];
@@ -76,6 +77,7 @@ class UserDao implements UserDaoInterface
         $user->address = $request['address'];
         $user->dob = $request['dob'];
         $user->profile = $request['profile'];
+        $user->updated_user_id = Auth::user()->id;
         $user->update();
         return $user;
     }

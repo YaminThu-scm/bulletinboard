@@ -40,9 +40,7 @@
                         @if(Auth::user() && Auth::user()->type == '0')
                         <a href="{{route('user.list')}}" class="d-block text-secondary text-decoration-none px-2">Users</a>
                         @endif
-                        @if(Auth::user() && Auth::user()->type == '1')
                         <a href="{{route('user.profile', Auth::user()->id)}}" class="d-block text-secondary text-decoration-none px-2">User</a>
-                        @endif
                         <a href="{{route('post.list')}}" class="d-block text-secondary text-decoration-none px-2">Posts</a>
                     </div>
                 </div>

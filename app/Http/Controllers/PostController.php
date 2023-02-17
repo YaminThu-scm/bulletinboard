@@ -74,7 +74,7 @@ class PostController extends Controller
 
     public function showPostEdit($id)
     {
-        $post = $this->postInterface->getPostById($id);
+        $this->postInterface->getPostById($id);
         return view('post.edit', compact('post'));
     }
 
@@ -97,7 +97,7 @@ class PostController extends Controller
 
     public function submitPostEditConfirmView(Request $request, $id)
     {
-        $post = $this->postInterface->updatedPostById($request, intval($id));
+        $this->postInterface->updatedPostById($request, intval($id));
         return redirect()->route('post.list');
     }
 

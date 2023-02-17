@@ -31,7 +31,6 @@ class UserFactory extends Factory
             'deleted_user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
-            'deleted_at' => now(),
         ];
     }
 

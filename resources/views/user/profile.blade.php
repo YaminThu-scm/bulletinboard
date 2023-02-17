@@ -17,7 +17,7 @@
                                 <p class="mb-2">{{ $user -> name}}</p>
                                 <div class="thumbnail-img">
                                     @if($user-> profile == null )
-                                    <img src="{{ asset('storage/404_img.jpg') }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm"> 
+                                    <img src="{{ asset('storage/404_img.jpg') }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm">
                                     @else
                                     <img src="{{ asset('storage/'. $user->profile) }}" alt="{{$user -> name}}" class="img-thumbnail my-4 shadow-sm">
                                     @endif
@@ -51,7 +51,7 @@
                         <div class="form-group row mb-3 mb-md-4">
                             <label for="inputDOB" class="col-sm-4">Date Of Birth</label>
                             <div class="col-sm-8">
-                                {{ $user -> dob}}
+                                {{date('Y/m/d', strtotime($user->dob))}}
                             </div>
                         </div>
                         <div class="form-group row mb-3 mb-md-4">

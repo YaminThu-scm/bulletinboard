@@ -102,7 +102,7 @@
                                                                         <label for="inputDOB" class="col-sm-4">Date Of
                                                                             Birth</label>
                                                                         <div class="col-sm-8">
-                                                                            {{ $user->dob }}
+                                                                            {{ date('Y/m/d', strtotime($user->dob)) }}
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mb-3 mb-md-4">
@@ -127,18 +127,18 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->created_user }}</td>
                                             <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->dob }}</td>
+                                            <td>{{ date('Y/m/d', strtotime($user->dob)) }}</td>
                                             <td>{{ $user->address }}</td>
-                                            <td>{{ $user->created_at }}</td>
-                                            <td>{{ $user->updated_at }}</td>
+                                            <td>{{ date('Y/m/d', strtotime($user->created_at)) }}</td>
+                                            <td>{{ date('Y/m/d', strtotime($user->updated_at)) }}</td>
                                             <td>
                                                 <a class="delete-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal"
+                                                    data-bs-target="#deleteModal{{ $user->id }}"
                                                     data-attr="{{ route('user.delete', $user->id) }}">
                                                     <i class="fa-solid fa-trash"></i></a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deleteModal" tabindex="-1"
-                                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="deleteModal{{ $user->id }}"
+                                                    tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
