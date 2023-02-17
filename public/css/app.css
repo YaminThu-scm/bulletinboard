@@ -164,6 +164,10 @@ a:hover {
   content: "\f06e";
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  background-color: transparent !important;
+}
+
 .form-check-input.custom-check {
   width: 4em !important;
   height: 2em !important;

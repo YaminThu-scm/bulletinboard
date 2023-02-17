@@ -50,8 +50,14 @@ class UserService implements UserServiceInterface
         return $this->userDao->deleteById($id);
     }
 
-    public function updatedUserById($request, $id)
-    {
-        return $this->userDao->updatedUserById($request, $id);
-    }
+  public function updatedUserById($request,$id)
+  {
+    return $this->userDao->updatedUserById($request,$id);
+  }
+
+  public function changeUserPassword($request)
+  {
+    return $this->userDao->changeUserPassword($request);
+  }
+
 }

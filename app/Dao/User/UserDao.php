@@ -36,7 +36,6 @@ class UserDao implements UserDaoInterface
         return $userList;
     }
 
-
     public function getUserById($id)
     {
         $user = User::findOrFail($id);
@@ -78,5 +77,12 @@ class UserDao implements UserDaoInterface
         $user->profile = $request['profile'];
         $user->update();
         return $user;
+    }
+
+    public function changeUserPassword($request)
+    {
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
     }
 }

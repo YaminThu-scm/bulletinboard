@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('updated_user_id');
             $table->unsignedBigInteger('deleted_user_id')->nullable();
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0)->nullable();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('created_user_id')->references('id')->on('users');

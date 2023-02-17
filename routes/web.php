@@ -15,12 +15,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('post.list');
 });
 
 Auth::routes(['register' => false]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     //post list
@@ -66,9 +64,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/user/edit-save/{id}', [App\Http\Controllers\UserController::class, 'submitUserEditConfirmView'])->name('user.edit.save');
 
-    Route::get('/change-password', function () {
-        return view('user.change_password');
-    })->name('user.change.password');
+    Route::get('user/change-password/{id}', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change.password');
+
+    Route::post('/user/change-password', [App\Http\Controllers\UserController::class, 'savePassword'])->name('change.password');
 
     Route::get('/post/download', [App\Http\Controllers\PostController::class, 'downloadPostCSV'])->name('post.download');
 

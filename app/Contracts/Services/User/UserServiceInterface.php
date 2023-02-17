@@ -22,4 +22,6 @@ interface UserServiceInterface
 
 	public function updatedUserById($request,$id);
 
+    public function changeUserPassword($request);
+
 }

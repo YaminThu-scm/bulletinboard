@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-group row mb-5">
-                            <a href="#" class="d-block">
+                            <a href="{{route('user.change.password', $user->id )}}" class="d-block">
                                 Change Password
                             </a>
                         </div>
@@ -81,3 +81,4 @@
 
 </div>
 @endsection
+
