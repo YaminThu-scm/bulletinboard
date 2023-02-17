@@ -45,9 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     //user edit confirm
     Route::get('/user/edit-confirm/{id}', [App\Http\Controllers\UserController::class, 'showUserEditConfirmView'])->name('user.confirm');
     Route::post('/user/edit-save/{id}', [App\Http\Controllers\UserController::class, 'submitUserEditConfirmView'])->name('user.edit.save');
-    Route::get('/change-password', function () {
-        return view('user.change_password');
-    })->name('user.change.password');
+    Route::get('user/change-password/{id}', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change.password');
+    Route::post('/user/change-password', [App\Http\Controllers\UserController::class, 'savePassword'])->name('change.password');
     Route::get('/post/download', [App\Http\Controllers\PostController::class, 'downloadPostCSV'])->name('post.download');
     Route::get('/post/upload', [App\Http\Controllers\PostController::class, 'showPostUploadView'])->name('upload.file');
     Route::post('/post/upload', [App\Http\Controllers\PostController::class, 'submitPostUploadView'])->name('upload.file');

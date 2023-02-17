@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -111,5 +112,28 @@ class UserController extends Controller
     {
         $this->userInterface->updatedUserById($request, intval($id));
         return redirect()->route('user.list');
+    }
+
+    public function changePassword()
+    {
+        return view('user.change_password');
+    }
+
+    public function savePassword(Request $request)
+    {
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error", "Your current password does not matches with the password.");
+        }
+        if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
+            // Current password and new password same
+            return redirect()->back()->with("error", "New Password cannot be same as your current password.");
+        }
+        $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:8|confirmed',
+        ]);
+        $this->userInterface->changeUserPassword($request);
+        return redirect()->back()->with("success", "Password successfully changed!");
     }
 }

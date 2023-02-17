@@ -22,4 +22,6 @@ interface UserDaoInterface
 
 	public function updatedUserById($request,$id);
 
+    public function changeUserPassword($request);
+
 }

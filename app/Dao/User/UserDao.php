@@ -81,4 +81,11 @@ class UserDao implements UserDaoInterface
         $user->update();
         return $user;
     }
+
+    public function changeUserPassword($request)
+    {
+        $user = Auth::user();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
+    }
 }
