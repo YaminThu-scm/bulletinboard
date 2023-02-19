@@ -17,14 +17,13 @@ class PostDao implements PostDaoInterface
     public function getPostListAll()
     {
         $searchKey = request('searchKey');
-        $postList =  Post::select("*")
-            ->where(function ($query) use ($searchKey) {
-                $query->whereHas('user', function ($query) {
-                    $query->where('name', 'like', '%' . request('searchKey') . '%');
-                });
-                $query->orwhere('title', 'LIKE', '%' . $searchKey . '%')
-                    ->orWhere('description', 'LIKE', '%' . $searchKey . '%');
-            })
+        $postList =  Post::where(function ($query) use ($searchKey) {
+            $query->whereHas('user', function ($query) {
+                $query->where('name', 'like', '%' . request('searchKey') . '%');
+            });
+            $query->orwhere('title', 'LIKE', '%' . $searchKey . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchKey . '%');
+        })
             ->orderBy('created_at', 'DESC')->paginate(config('data.pagination'));
         return $postList;
     }
@@ -32,8 +31,7 @@ class PostDao implements PostDaoInterface
     public function getPostList()
     {
         $searchKey = request('searchKey');
-        $postList =  Post::select("*")
-            ->where('created_user_id', Auth::user()->id)
+        $postList =  Post::where('created_user_id', Auth::user()->id)
             ->where(function ($query) use ($searchKey) {
                 $query->whereHas('user', function ($query) {
                     $query->where('name', 'like', '%' . request('searchKey') . '%');
@@ -59,7 +57,7 @@ class PostDao implements PostDaoInterface
 
     public function deleteById($id)
     {
-        $post =Post::findOrFail($id);
+        $post = Post::findOrFail($id);
         $post->deleted_user_id = Auth::user()->id;
         $post->save();
         $post->delete();

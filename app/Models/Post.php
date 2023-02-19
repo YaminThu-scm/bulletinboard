@@ -29,4 +29,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'created_user_id', 'id');
     }
+
+    public function updated_user()
+    {
+        return $this->belongsTo(User::class, 'updated_user_id', 'id');
+    }
 }

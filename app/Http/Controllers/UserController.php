@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -46,10 +47,12 @@ class UserController extends Controller
             $request['profile'] = $fileName;
         }
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|confirmed|min:6',
-            'profile' => 'mimes:jpg,jpeg,png'
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:8|regex:/^(?=.*[A-Z])(?=.*\d)/',
+            'type' => 'required',
+            'profile' => 'required|mimes:jpg,jpeg,png',
+            'phno' => 'min:9|max:20'
         ]);
         return redirect()->route('user.create.confirm')->withInput();
     }
@@ -64,11 +67,6 @@ class UserController extends Controller
 
     public function submitConfirmCreateUser(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
         $this->userInterface->addUser($request);
         return redirect()->route('user.list');
     }
@@ -93,9 +91,14 @@ class UserController extends Controller
             $request['profile'] = $fileName;
         }
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|string',
             'type' => 'required',
+            'phno' => 'min:9|max:20',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
         ]);
         return redirect()->route('user.confirm', [$id])->withInput();
     }
@@ -134,6 +137,6 @@ class UserController extends Controller
             'new-password' => 'required|string|min:8|confirmed',
         ]);
         $this->userInterface->changeUserPassword($request);
-        return redirect()->back()->with("success", "Password successfully changed!");
+        return redirect()->route('post.list')->with("success", "Password successfully changed!");
     }
 }

@@ -30,8 +30,9 @@
                                 <label for="SwitchChecked" class="col-sm-4">Status</label>
                                 <div class="col-sm-8">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input custom-check" type="checkbox" id="SwitchChecked" name="status"
-                                            @if (old('status')) checked @endif onclick="return false;">
+                                        <input class="form-check-input custom-check" type="checkbox" id="SwitchChecked"
+                                            name="status" @if (old('status')) checked @endif
+                                            onclick="return false;">
                                     </div>
                                 </div>
                             </div>

@@ -102,7 +102,7 @@
                                                                         <label for="inputDOB" class="col-sm-4">Date Of
                                                                             Birth</label>
                                                                         <div class="col-sm-8">
-                                                                            {{ date('Y/m/d', strtotime($user->dob)) }}
+                                                                            {{ date_format_change($user->dob) }}
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mb-3 mb-md-4">
@@ -127,10 +127,10 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->created_user }}</td>
                                             <td>{{ $user->phone }}</td>
-                                            <td>{{ date('Y/m/d', strtotime($user->dob)) }}</td>
+                                            <td>{{ date_format_change($user->dob) }}</td>
                                             <td>{{ $user->address }}</td>
-                                            <td>{{ date('Y/m/d', strtotime($user->created_at)) }}</td>
-                                            <td>{{ date('Y/m/d', strtotime($user->updated_at)) }}</td>
+                                            <td>{{ date_format_change($user->created_at) }}</td>
+                                            <td>{{ date_format_change($user->updated_at) }}</td>
                                             <td>
                                                 <a class="delete-btn" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal{{ $user->id }}"

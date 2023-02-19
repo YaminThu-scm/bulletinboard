@@ -28,7 +28,6 @@ class UserFactory extends Factory
             'dob' => now(),
             'created_user_id' => 1,
             'updated_user_id' => 1,
-            'deleted_user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ];

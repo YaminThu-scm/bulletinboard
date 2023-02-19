@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ExportPosts;
 use App\Imports\ImportPosts;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -24,14 +25,13 @@ class PostController extends Controller
 
     public function showPostList()
     {
-        if(Auth::user()->type == '0') {
+        if (Auth::user()->type == '0') {
             $postList = $this->postInterface->getPostListAll();
             return view('post.list', compact('postList'));
-            }
-            else {
+        } else {
             $postList = $this->postInterface->getPostList();
             return view('post.list', compact('postList'));
-            }
+        }
     }
 
     public function createPost()
@@ -42,7 +42,7 @@ class PostController extends Controller
     public function savePost(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|string|max:255|unique:posts,title',
             'description' => 'required',
         ]);
         return redirect()->route('post.create.confirm')->withInput();
@@ -58,10 +58,6 @@ class PostController extends Controller
 
     public function submitConfirmCreatePost(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
         $this->postInterface->addPost($request);
         return redirect()->route('post.list');
     }
@@ -74,14 +70,19 @@ class PostController extends Controller
 
     public function showPostEdit($id)
     {
-        $this->postInterface->getPostById($id);
+        $post = $this->postInterface->getPostById($id);
         return view('post.edit', compact('post'));
     }
 
     public function submitPostEditView(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('posts')->ignore($id),
+            ],
             'description' => 'required',
         ]);
         return redirect()->route('post.confirm', [$id])->withInput();
@@ -103,16 +104,20 @@ class PostController extends Controller
 
     public function downloadPostCSV()
     {
-      return Excel::download(new ExportPosts, 'posts.csv');
+        return Excel::download(new ExportPosts, 'posts.csv');
     }
 
-    public function showPostUploadView() {
-      return view('post.upload_file');
+    public function showPostUploadView()
+    {
+        return view('post.upload_file');
     }
 
     public function submitPostUploadView(Request $request)
     {
-      Excel::import(new ImportPosts, request()->file('upload-file'));
-      return redirect()->route('post.list');
+        $request->validate([
+            'upload-file' => 'required|file|max:2048|mimes:csv'
+        ]);
+        Excel::import(new ImportPosts, request()->file('upload-file'));
+        return redirect()->route('post.list');
     }
 }
