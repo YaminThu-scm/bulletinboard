@@ -12,8 +12,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "phpmailer/phpmailer": "^6.7",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "phpmailer/phpmailer": "^6.7"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -28,7 +28,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": ["app/Helpers/helper.php"]
     },
     "autoload-dev": {
         "psr-4": {

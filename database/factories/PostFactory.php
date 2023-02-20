@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PostFactory extends Factory
 {
@@ -12,7 +12,7 @@ class PostFactory extends Factory
      * Define the model's default state.
      *
      * @return array
-     * 
+     *
      */
 
     protected $model = Post::class;
@@ -26,10 +26,8 @@ class PostFactory extends Factory
             'status' => $this->faker->randomElement([0, 1]),
             'created_user_id' => $this->faker->randomElement($users),
             'updated_user_id' => $this->faker->randomElement($users),
-            'deleted_user_id' => $this->faker->randomElement($users),
             'created_at' => now(),
             'updated_at' => now(),
-            'deleted_at' => now(),
         ];
     }
 }
