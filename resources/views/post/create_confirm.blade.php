@@ -22,7 +22,7 @@
                                 <div class="col-sm-8">
                                     <textarea hidden class="form-control" id="inputDesc" rows="3" name="description" required autocomplete autofocus
                                         readonly="readonly">{{ old('description') }}</textarea>
-                                    <span>{{ old('description') }}</span>
+                                    <span class="preservelines">{{ old('description') }}</span>
                                 </div>
                             </div>
                             <button type="submit" class="cmn-btn me-4">Create</button>

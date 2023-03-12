@@ -24,20 +24,21 @@
                                 <div class="col-sm-7">
                                     <input id="current-password" type="password"
                                         class="form-control @error('current-password') is-invalid @enderror"
-                                        name="current-password" required>
-                                    @if ($errors->has('current-password'))
+                                        name="current-password" value="{{old('current-password')}}">
+                                        @error('current-password')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('current-password') }}</strong>
+                                            <strong>{{ $message }}</strong>
                                         </span>
-                                    @endif
+                                    @enderror
+
                                 </div>
                             </div>
                             <div class="row form-group mb-md-4{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                 <label for="new-password" class="col-sm-5 control-label">New Password</label>
                                 <div class="col-sm-7">
                                     <input id="new-password" type="password"
-                                        class="form-control @error('new-password') is-invalid @enderror" name="new-password"
-                                        required>
+                                        class="form-control @error('new-password') is-invalid @enderror" name="new-password" value="{{ old('new-password')}}"
+                                        >
                                     @if ($errors->has('new-password'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('new-password') }}</strong>
@@ -50,8 +51,13 @@
                                 <label for="new-password-confirm" class="col-sm-5 control-label">Confirm New
                                     Password</label>
                                 <div class="col-sm-7">
-                                    <input id="new-password-confirm" type="password" class="form-control"
-                                        name="new-password_confirmation" required>
+                                    <input id="new-password-confirm" type="password" class="form-control @error('new-password_confirmation') is-invalid @enderror"
+                                        name="new-password_confirmation" value="{{ old('new-password_confirmation')}}">
+                                        @if ($errors->has('new-password_confirmation'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('new-password_confirmation') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                             <button type="submit" class="cmn-btn">Change</button>

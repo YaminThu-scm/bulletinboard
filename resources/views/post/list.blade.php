@@ -43,7 +43,7 @@
                                                         data-bs-target="#postModal{{ $post->id }}">
                                                         <span>
                                                             @if ($post->status == '0')
-                                                                <span class="status">#Draft</span>
+                                                                <span class="status draft">#Draft</span>
                                                             @else
                                                                 <span class="status">#Active</span>
                                                             @endif
@@ -102,7 +102,12 @@
                                                                                 User</label>
                                                                             <div class="col-sm-8">
                                                                                 <p class="mb-2">
-                                                                                    {{ $post->user->name }}</p>
+                                                                                    @if (isset($post->user) && isset($post->user->name))
+                                                                                        {{ $post->user->name }}
+                                                                                    @else
+                                                                                        UNKNOWN USER
+                                                                                    @endif
+                                                                                </p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row mb-3">
@@ -119,7 +124,13 @@
                                                                                 Updated User</label>
                                                                             <div class="col-sm-8">
                                                                                 <p class="mb-2">
-                                                                                    {{ $post->updated_user->name }}</p>
+                                                                                    @if (isset($post->updated_user) && isset($post->updated_user->name))
+                                                                                        {{ $post->updated_user->name }}
+                                                                                    @else
+                                                                                        UNKNOWN USER
+                                                                                    @endif
+
+                                                                                </p>
                                                                             </div>
                                                                         </div>
                                                                     </form>
@@ -132,7 +143,13 @@
                                                         </div>
                                                     </div>
                                                 <td>{{ $post->description }}</td>
-                                                <td>{{ $post->user->name }}</td>
+                                                <td>
+                                                    @if (isset($post->user) && isset($post->user->name))
+                                                        {{ $post->user->name }}
+                                                    @else
+                                                        UNKNOWN USER
+                                                    @endif
+                                                </td>
                                                 <td>{{ date_format_change($post->created_at) }}</td>
                                                 <td><a class="edit-btn" href="{{ route('post.edit', $post->id) }}">
                                                         <i class="fa-solid fa-pen-to-square"></i></a></td>
@@ -178,6 +195,7 @@
                                 <div class="alert alert-info">There is no posts to show.</div>
                             @endif
                         </div>
+                        <div class="text-center fw-bold mb-3">Total Posts List {{ $postList->total() }}</div>
                         <div class="navigation">
                             {{ $postList->appends(request()->query())->links() }}
                         </div>

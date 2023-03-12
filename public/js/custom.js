@@ -19,15 +19,15 @@ function goBack() {
 }
 
 $(document).ready(
-    function(){
+    function () {
         $('input:file').change(
-            function(){
+            function () {
                 if ($(this).val()) {
-                    $('.upload-btn').attr('disabled',false);
+                    $('.upload-btn').attr('disabled', false);
                     $('.upload-btn').addClass('active');
                 }
             }
-            );
+        );
     });
 
 imgInp.onchange = (evt) => {
@@ -36,3 +36,4 @@ imgInp.onchange = (evt) => {
         showImg.src = URL.createObjectURL(file);
     }
 };
+

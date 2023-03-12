@@ -24,7 +24,7 @@
                             <div class="form-group row mb-5">
                                 <label for="inputDesc" class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control @error('description') is-invalid @enderror" id="inputDesc" rows="3"
+                                    <textarea class="textarea-blk form-control @error('description') is-invalid @enderror" id="inputDesc" rows="3"
                                         name="description">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">

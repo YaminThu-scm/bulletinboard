@@ -31,9 +31,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
         });
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('created_user_id')->references('id')->on('users');
-            $table->foreign('updated_user_id')->references('id')->on('users');
-            $table->foreign('deleted_user_id')->references('id')->on('users');
+            $table->foreign('created_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('updated_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('deleted_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

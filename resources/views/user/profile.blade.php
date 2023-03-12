@@ -60,7 +60,7 @@
                             <div class="form-group row mb-3 mb-md-4">
                                 <label for="inputAddress" class="col-sm-4">Address</label>
                                 <div class="col-sm-8">
-                                    {{ $user->address }}
+                                    <span class="preservelines">{{ $user->address }}</span>
                                 </div>
                             </div>
                         </form>

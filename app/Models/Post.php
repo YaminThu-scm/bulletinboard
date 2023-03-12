@@ -14,6 +14,7 @@ class Post extends Model
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
     protected $fillable = [
+        'id',
         'title',
         'description',
         'status',

@@ -56,15 +56,22 @@
                                         class="form-control  @error('password') is-invalid @enderror"
                                         id="inputConfirmPassword" placeholder="ConfirmPassword"
                                         autocomplete="current-password">
+                                    @error('password_confirmation')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row mb-3 mb-md-4">
                                 <label for="inputType" class="col-sm-4 col-form-label">Type</label>
-                                <div class="btn-group col-sm-8">
+                                <div class="col-sm-8">
                                     <select name="type" class="form-select @error('type') is-invalid @enderror">
-                                        <option selected value="">Select Type</option>
-                                        <option value="0">Admin</option>
-                                        <option value="1">User</option>
+                                        <option value="">Select Type</option>
+                                        <option value="0" @if (old('type') == '0') selected @endif>Admin
+                                        </option>
+                                        <option value="1" @if (old('type') == '1') selected @endif>User
+                                        </option>
                                     </select>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
@@ -89,8 +96,13 @@
                             <div class="form-group row mb-3 mb-md-4">
                                 <label for="inputDOB" class="col-sm-4 col-form-label">Date Of Birth</label>
                                 <div class="col-sm-8">
-                                    <input type="date" name="dob" value="{{ old('dob') }}" class="form-control"
+                                    <input type="date" name="dob" value="{{ old('dob') }}" class="form-control  @error('dob') is-invalid @enderror"
                                         id="inputDOB" placeholder="DOB">
+                                        @error('dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row mb-3 mb-md-4">
@@ -111,8 +123,7 @@
                                         </span>
                                     @enderror
                                     <div class="thumbnail-img">
-                                        <img src="#" alt="{{ old('name') }}"
-                                            class="img-thumbnail my-4 shadow-sm" id="showImg">
+                                        <img src="#" class="img-thumbnail my-4 shadow-sm" id="showImg">
                                     </div>
                                 </div>
                             </div>

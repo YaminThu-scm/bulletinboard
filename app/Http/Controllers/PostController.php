@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\Post\PostServiceInterface;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Models\Post;
-use Ramsey\Uuid\Type\Integer;
-use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ExportPosts;
 use App\Imports\ImportPosts;
+use Illuminate\Http\Request;
+use App\Enums\PostStatusEnum;
+use Ramsey\Uuid\Type\Integer;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\PostEditRequest;
+use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUploadRequest;
+use App\Contracts\Services\Post\PostServiceInterface;
 
 class PostController extends Controller
 {
@@ -39,12 +43,9 @@ class PostController extends Controller
         return view('post.create');
     }
 
-    public function savePost(Request $request)
+    public function savePost(PostCreateRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255|unique:posts,title',
-            'description' => 'required',
-        ]);
+        $request->validated();
         return redirect()->route('post.create.confirm')->withInput();
     }
 
@@ -74,17 +75,9 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-    public function submitPostEditView(Request $request, $id)
+    public function submitPostEditView(PostEditRequest $request, $id)
     {
-        $request->validate([
-            'title' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('posts')->ignore($id),
-            ],
-            'description' => 'required',
-        ]);
+        $request->validated();
         return redirect()->route('post.confirm', [$id])->withInput();
     }
 
@@ -104,7 +97,7 @@ class PostController extends Controller
 
     public function downloadPostCSV()
     {
-        return Excel::download(new ExportPosts, 'posts.csv');
+        return $this->postInterface->downloadPostCSV();
     }
 
     public function showPostUploadView()
@@ -112,12 +105,20 @@ class PostController extends Controller
         return view('post.upload_file');
     }
 
-    public function submitPostUploadView(Request $request)
+    public function submitPostUploadView(PostUploadRequest $request)
     {
-        $request->validate([
-            'upload-file' => 'required|file|max:2048|mimes:csv'
-        ]);
-        Excel::import(new ImportPosts, request()->file('upload-file'));
-        return redirect()->route('post.list');
+        // $request->validate([
+        //     'upload-file' => 'required|file|max:2048|mimes:csv'
+        // ]);
+        // Excel::import(new ImportPosts, request()->file('upload-file'));
+        // return redirect()->route('post.list');
+        $validated = $request->validated();
+        $uploadedUserId = Auth::user()->id;
+        $content = $this->postInterface->uploadPostCSV($validated, $uploadedUserId);
+        if (!$content['isUploaded']) {
+            return redirect('/post/upload')->with('error', $content['message']);
+        } else {
+          return redirect()->route('post.list');
+        }
     }
 }

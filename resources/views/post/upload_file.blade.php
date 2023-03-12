@@ -7,6 +7,11 @@
                 <div class="card">
                     <h5 class="card-header">Upload CSV File</h5>
                     <div class="card-body">
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                        {{ session('error') }}
+                        </div>
+                        @endif
                         <form method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">

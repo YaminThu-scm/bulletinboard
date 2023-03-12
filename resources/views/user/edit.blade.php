@@ -46,11 +46,11 @@
                             </div>
                             <div class="form-group row mb-3 mb-md-4">
                                 <label for="inputConfirmPassword" class="col-sm-4 col-form-label">Type</label>
-                                <div class="btn-group col-sm-8">
+                                <div class="col-sm-8">
                                     <select class="form-select" name="type">
-                                        <option value="0" @if ($user->type == '0') selected @endif>Admin
+                                        <option value="0" @if ($user->type == '0' || old('type') == '0') selected @endif>Admin
                                         </option>
-                                        <option value="1" @if ($user->type == '1') selected @endif>User
+                                        <option value="1" @if ($user->type == '1' || old('type') == '1') selected @endif>User
                                         </option>
                                     </select>
                                 </div>
@@ -59,7 +59,7 @@
                                 <label for="inputPhoneNo" class="col-sm-4 col-form-label">Phone</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="phone"
-                                        class="form-control @error('phno') is-invalid  @enderror" id="inputPhoneNo"
+                                        class="form-control @error('phone') is-invalid  @enderror" id="inputPhoneNo"
                                         value="{{ old('phone', $user->phone) }}">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-5">
-                                <a href="{{ route('user.change.password', $user->id) }}" class="d-block">
+                                <a href="{{ route('user.change.password') }}" class="d-block">
                                     Change Password
                                 </a>
                             </div>

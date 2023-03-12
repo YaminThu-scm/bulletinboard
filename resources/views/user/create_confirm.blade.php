@@ -77,7 +77,7 @@
                                 <label for="inputDOB" class="col-sm-4">Date Of Birth</label>
                                 <div class="col-sm-8">
                                     <input type="hidden" name="dob" class="form-control" id="inputDOB"
-                                        value="{{ old('dob') }}" autocomplete autofocus readonly="readonly">
+                                        value="{{ old('dob') }}"  autofocus readonly="readonly">
                                     <span>{{ date_format_change(old('dob')) }}</span>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                 <div class="col-sm-8">
                                     <textarea hidden name="address" class="form-control" id="inputAddress" rows="3" autocomplete autofocus
                                         readonly="readonly">{{ old('address') }}</textarea>
-                                    <span>{{ old('address') }}</span>
+                                    <span class="preservelines">{{ old('address') }}</span>
                                 </div>
                             </div>
                             <button type="submit" class="cmn-btn me-4">Create</button>

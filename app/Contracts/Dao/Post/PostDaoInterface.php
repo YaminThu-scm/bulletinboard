@@ -12,6 +12,10 @@ interface PostDaoInterface
 
 	public function getPostList();
 
+    public function getPostListAllDownload();
+
+	public function getPostListDownload();
+
 	public function addPost(Request $request);
 
 	public function deleteById($id);
@@ -19,5 +23,7 @@ interface PostDaoInterface
 	public function getPostById($id);
 
 	public function updatedPostById($request,$id);
+
+    public function uploadPostCSV($validated, $uploadedUserId);
 
 }

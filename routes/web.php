@@ -31,12 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
     //post create confirm
     Route::get('/post/create-confirm', [App\Http\Controllers\PostController::class, 'confirmCreatePost'])->name('post.create.confirm');
     Route::post('/post/create-confirm', [App\Http\Controllers\PostController::class, 'submitConfirmCreatePost'])->name('post.create.confirm');
-    //post edit
-    Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class, 'showPostEdit'])->name('post.edit');
-    Route::post('/post/edit/{id}/confirm', [App\Http\Controllers\PostController::class, 'submitPostEditView'])->name('post.edit.store');
-    //post edit confirm
-    Route::get('/post/edit-confirm/{id}', [App\Http\Controllers\PostController::class, 'showPostEditConfirmView'])->name('post.confirm');
-    Route::post('/post/edit-save/{id}', [App\Http\Controllers\PostController::class, 'submitPostEditConfirmView'])->name('post.edit.save');
+    Route::get('/post/download', [App\Http\Controllers\PostController::class, 'downloadPostCSV'])->name('post.download');
+    Route::get('/post/upload', [App\Http\Controllers\PostController::class, 'showPostUploadView'])->name('upload.file');
+    Route::post('/post/upload', [App\Http\Controllers\PostController::class, 'submitPostUploadView'])->name('upload.file');
+    Route::get('user/change-password', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change.password');
+    Route::post('/user/change-password', [App\Http\Controllers\UserController::class, 'savePassword'])->name('change.password');
+});
+
+Route::group(['middleware' => ['usercheck']], function () {
     //user profile
     Route::get('/user/profile/{id}', [App\Http\Controllers\UserController::class, 'showUser'])->name('user.profile');
     //user edit
@@ -45,11 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
     //user edit confirm
     Route::get('/user/edit-confirm/{id}', [App\Http\Controllers\UserController::class, 'showUserEditConfirmView'])->name('user.confirm');
     Route::post('/user/edit-save/{id}', [App\Http\Controllers\UserController::class, 'submitUserEditConfirmView'])->name('user.edit.save');
-    Route::get('user/change-password/{id}', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change.password');
-    Route::post('/user/change-password', [App\Http\Controllers\UserController::class, 'savePassword'])->name('change.password');
-    Route::get('/post/download', [App\Http\Controllers\PostController::class, 'downloadPostCSV'])->name('post.download');
-    Route::get('/post/upload', [App\Http\Controllers\PostController::class, 'showPostUploadView'])->name('upload.file');
-    Route::post('/post/upload', [App\Http\Controllers\PostController::class, 'submitPostUploadView'])->name('upload.file');
 });
 
 // only admin authorized
@@ -64,4 +61,13 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/user/list', [App\Http\Controllers\UserController::class, 'showUserList'])->name('user.list');
     //user delete
     Route::get('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteUser'])->name('user.delete');
+});
+
+Route::group(['middleware' => ['postownercheck']], function () {
+ //post edit
+ Route::get('/post/edit/{id}', [App\Http\Controllers\PostController::class, 'showPostEdit'])->name('post.edit');
+ Route::post('/post/edit/{id}/confirm', [App\Http\Controllers\PostController::class, 'submitPostEditView'])->name('post.edit.store');
+ //post edit confirm
+ Route::get('/post/edit-confirm/{id}', [App\Http\Controllers\PostController::class, 'showPostEditConfirmView'])->name('post.confirm');
+ Route::post('/post/edit-save/{id}', [App\Http\Controllers\PostController::class, 'submitPostEditConfirmView'])->name('post.edit.save');
 });

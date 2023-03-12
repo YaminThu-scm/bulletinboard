@@ -76,7 +76,7 @@
                                 <div class="col-sm-8">
                                     <textarea hidden name="address" class="form-control" id="inputAddress" rows="3" autocomplete autofocus
                                         readonly="readonly">{{ old('address') }}</textarea>
-                                    <span>{{ old('address') }}</span>
+                                    <span class="preservelines">{{ old('address') }}</span>
                                 </div>
                             </div>
                             <button type="submit" class="cmn-btn">Update</button>

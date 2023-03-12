@@ -13,9 +13,11 @@
                             <input type="text" name="searchEmail" class="form-control me-2"
                                 value="{{ request('searchEmail') }}" placeholder="Email">
                             <input type="text" name="searchCreatedFrom" class="form-control me-2"
-                                value="{{ request('searchCreatedFrom') }}" placeholder="Created From">
+                                value="{{ request('searchCreatedFrom') }}" placeholder="Created From" onfocus="(this.type='date')"
+                                onblur="(this.type='text')">
                             <input type="text" name="searchCreatedTo" class="form-control me-3"
-                                value="{{ request('searchCreatedTo') }}" placeholder="Created To">
+                                value="{{ request('searchCreatedTo') }}" placeholder="Created To" onfocus="(this.type='date')"
+                                onblur="(this.type='text')">
                             <button type="submit" class="cmn-btn me-3"><i
                                     class="fa-solid fa-magnifying-glass me-2"></i>Search</button>
                             <a href="{{ route('user.create') }}" class="cmn-btn me-3"><i
@@ -102,7 +104,7 @@
                                                                         <label for="inputDOB" class="col-sm-4">Date Of
                                                                             Birth</label>
                                                                         <div class="col-sm-8">
-                                                                            {{ date_format_change($user->dob) }}
+                                                                            {{ dob_format_change($user->dob) }}
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row mb-3 mb-md-4">
@@ -125,10 +127,23 @@
                                                 </div>
                                             </td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_user }}</td>
+                                            <td>
+                                                @if ($user->created_user != null)
+                                                    {{ $user->created_user }}
+                                                @else
+                                                    Unknown
+                                                @endif
+                                            </td>
                                             <td>{{ $user->phone }}</td>
-                                            <td>{{ date_format_change($user->dob) }}</td>
-                                            <td>{{ $user->address }}</td>
+                                            <td>{{ dob_format_change($user->dob) }}</td>
+                                            <td class="address-col">
+                                                @if (strlen($user->address) > 10)
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{ $user->address }}">{{ substr($user->address, 0, 10) . '...' }}</span>
+                                                @else
+                                                    {{ $user->address }}
+                                                @endif
+                                            </td>
                                             <td>{{ date_format_change($user->created_at) }}</td>
                                             <td>{{ date_format_change($user->updated_at) }}</td>
                                             <td>
@@ -167,6 +182,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="text-center fw-bold mb-3">Total Users List {{ $userList->total() }}</div>
                         <div class="navigation">
                             {{ $userList->appends(request()->query())->links() }}
                         </div>

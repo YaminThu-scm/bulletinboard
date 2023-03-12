@@ -18,4 +18,8 @@ interface PostServiceInterface
 	public function getPostById($id);
 
 	public function updatedPostById($request,$id);
+
+    public function downloadPostCSV();
+
+    public function uploadPostCSV($validated, $uploadedUserId);
 }
