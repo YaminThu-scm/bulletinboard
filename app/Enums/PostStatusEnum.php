@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum PostStatusEnum:int
+enum PostStatusEnum: int
 {
-    const Pending = '0';
+    const Draft = '0';
     const Active =  '1';
 }

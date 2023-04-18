@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
  */
 interface PostDaoInterface
 {
-	
+	public function getPostListAll();
+
 	public function getPostList();
+
+    public function getPostListAllDownload();
+
+	public function getPostListDownload();
 
 	public function addPost(Request $request);
 
@@ -18,5 +23,7 @@ interface PostDaoInterface
 	public function getPostById($id);
 
 	public function updatedPostById($request,$id);
+
+    public function uploadPostCSV($validated, $uploadedUserId);
 
 }

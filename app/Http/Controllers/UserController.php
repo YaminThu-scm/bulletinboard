@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Services\User\UserServiceInterface;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Auth\Events\Failed;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserCreateRequest;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Contracts\Services\User\UserServiceInterface;
 
 class UserController extends Controller
 {
@@ -21,7 +24,7 @@ class UserController extends Controller
         $this->userInterface = $userServiceInterface;
     }
 
-    public function showUserList()
+    public function showUserList(Request $request)
     {
         $userList = $this->userInterface->getUserList();
         return view('user.list', compact('userList'));
@@ -46,10 +49,19 @@ class UserController extends Controller
             $request['profile'] = $fileName;
         }
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|confirmed|min:6',
-            'profile' => 'mimes:jpg,jpeg,png'
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => [
+                'required', 'confirmed',
+                Password::min(8)
+                    ->mixedCase()
+                    ->numbers(),
+            ],
+            'password_confirmation' => 'required_with:password|same:password|min:8',
+            'type' => 'required',
+            'profile' => 'required|mimes:jpg,jpeg,png',
+            'phno' => 'nullable|min:9|max:20',
+            'dob' => 'nullable|before:18 years ago',
         ]);
         return redirect()->route('user.create.confirm')->withInput();
     }
@@ -64,11 +76,6 @@ class UserController extends Controller
 
     public function submitConfirmCreateUser(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
         $this->userInterface->addUser($request);
         return redirect()->route('user.list');
     }
@@ -79,23 +86,29 @@ class UserController extends Controller
         return redirect()->route('user.list');
     }
 
-    public function showUserEdit($id)
+    public function showUserEdit()
     {
-        $user = $this->userInterface->getUserById($id);
+        $userId = Auth::user()->id;
+        $user = $this->userInterface->getUserById($userId);
         return view('user.edit', compact('user'));
     }
 
     public function submitUserEditView(Request $request, $id)
     {
         if ($request->hasFile('profile')) {
-            $fileName = uniqid() . $request->file('profile')->getClientOriginalName();
+            $fileName = Auth::user()->id .'_'. $request->file('profile')->getClientOriginalName();
             $request->file('profile')->storeAs('public', $fileName);
             $request['profile'] = $fileName;
         }
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|string',
             'type' => 'required',
+            'phone' => 'nullable|min:9|max:20',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
         ]);
         return redirect()->route('user.confirm', [$id])->withInput();
     }
@@ -116,10 +129,11 @@ class UserController extends Controller
 
     public function changePassword()
     {
+
         return view('user.change_password');
     }
 
-    public function savePassword(Request $request)
+    public function savePassword(ChangePasswordRequest $request)
     {
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // The passwords matches
@@ -129,11 +143,7 @@ class UserController extends Controller
             // Current password and new password same
             return redirect()->back()->with("error", "New Password cannot be same as your current password.");
         }
-        $request->validate([
-            'current-password' => 'required',
-            'new-password' => 'required|string|min:8|confirmed',
-        ]);
         $this->userInterface->changeUserPassword($request);
-        return redirect()->back()->with("success", "Password successfully changed!");
+        return redirect()->route('post.list')->with("success", "Password successfully changed!");
     }
 }

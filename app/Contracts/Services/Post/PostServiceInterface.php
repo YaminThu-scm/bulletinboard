@@ -7,8 +7,9 @@ namespace App\Contracts\Services\Post;
  */
 interface PostServiceInterface
 {
-	
-	public function getPostList();
+	public function getPostListAll();
+
+    public function getPostList();
 
 	public function addPost($request);
 
@@ -18,5 +19,7 @@ interface PostServiceInterface
 
 	public function updatedPostById($request,$id);
 
+    public function downloadPostCSV();
 
+    public function uploadPostCSV($validated, $uploadedUserId);
 }

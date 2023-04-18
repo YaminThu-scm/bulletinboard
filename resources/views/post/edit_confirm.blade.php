@@ -23,15 +23,16 @@
                                 <div class="col-sm-8">
                                     <textarea hidden class="form-control" name="description" id="inputDesc" required autocomplete autofocus
                                         readonly="readonly"> {{ old('description') }}</textarea>
-                                    <span>{{ old('description') }}</span>
+                                    <span class="preservelines">{{ old('description') }}</span>
                                 </div>
                             </div>
                             <div class="form-group row mb-5">
                                 <label for="SwitchChecked" class="col-sm-4">Status</label>
                                 <div class="col-sm-8">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input custom-check" type="checkbox" id="SwitchChecked" name="status"
-                                            @if (old('status')) checked @endif onclick="return false;">
+                                        <input class="form-check-input custom-check" type="checkbox" id="SwitchChecked"
+                                            name="status" @if (old('status')) checked @endif
+                                            onclick="return false;">
                                     </div>
                                 </div>
                             </div>
